@@ -1,0 +1,20 @@
+{
+    "name": "RestauranteAPP",
+    "short_name": "Restaurante",
+    "description": "Bienvenidos al sistema de gestion de pedidos para restaurante",
+    "background_color": "#3A3A3A",
+    "theme_color": "#3A3A3A",
+    "orientation": "portrait",
+    "display": "standalone",
+    "start_url": "./?utm_source=web_app_manifest",
+    "scope": "./",
+    "lang": "es-MX",
+    "icons": [{
+            "src": "./favicon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+
+    ]
+}

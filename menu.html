@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Home - Brand</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700,900,900i">
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css">
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css">
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css">
+    <link rel="stylesheet" href="assets/css/alertify.rtl.css">
+    <link rel="stylesheet" href="assets/css/checkboxProductos.css">
+    <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="assets/css/OtherStyle.css">
+</head>
+
+<body id="page-top">
+    <div id="menu">
+        <nav class="navbar navbar-light navbar-expand-lg sticky-top bg-secondary text-uppercase" id="mainNav">
+            <div class="container-fluid"><a class="navbar-brand js-scroll-trigger" href="index.html"><i
+                        class="fa fa-ravelry ocultar" id="icon"></i>sistema restaurante</a><button data-toggle="collapse"
+                    data-target="#navbarResponsive"
+                    class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded"
+                    aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><i
+                        class="fa fa-bars"></i></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="index.html">home</a>
+                        </li>
+                        <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="orden.html">orden</a>
+                        </li>
+                        <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger active"
+                                href="#page-top">menú</a></li>
+                                <li class="nav-item dropdown d-lg-flex align-items-lg-center"><a
+                                class="dropdown-toggle nav-link" data-toggle="dropdown" aria-expanded="false"
+                                href="#">administración</a>
+                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation"
+                                    href="categoria.html">categoria</a><a class="dropdown-item" role="presentation"
+                                    href="productos.html">producto</a></div>
+                        </li>
+                        <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="login.html">Cerrar Sesion</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class=" my-4">
+            <div class="row mx-2">
+                <div class="col-md-4 col-sm-6 col-lg-3 my-2" v-for="producto in productos">
+                    <div class="card-deck justify-content-center">
+                        <div class="card border border-dark card text-center rounded" style="width: 18rem;">
+                            <div class="card-header">
+                                <h5 class="card-title">{{producto.nombreProducto}}</h5>
+                            </div>
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">precio: {{producto.precio}}</li>
+                                <li class="list-group-item">Categoria: {{nombreCategoria(producto.idCategoria)}}</li>
+                                <li class="list-group-item"><i class="fa fa-motorcycle"
+                                        v-show="producto.esPreparado==0"></i><i class="fas fa-hamburger"
+                                        v-show="producto.esPreparado==1"></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer id="footer" class="footer text-center">
+            <div class="container">
+                <h4 class="text-uppercase">contáctanos</h4>
+                <div class="row mt-3">
+                    <div class="col-sm">
+                        <h5>Cristian Ayala</h5>
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><a
+                                    class="btn btn-outline-light btn-social text-center rounded-circle" role="button"
+                                    data-bs-hover-animate="swing" href="https://www.facebook.com/Cristian.Ayala.Chacon"
+                                    target="_blank"><i class="fa fa-facebook fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a
+                                    class="btn btn-outline-light btn-social text-center rounded-circle" role="button"
+                                    data-bs-hover-animate="swing" href="https://www.instagram.com/cristian.ayala10/"
+                                    target="_blank"><i class="fa fa-instagram fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a
+                                    class="btn btn-outline-light btn-social text-center rounded-circle" role="button"
+                                    data-bs-hover-animate="swing" href="https://github.com/Cristian-Ayala"
+                                    target="_blank"><i class="fa fa-github fa-fw"></i></a></li>
+                            <li class="list-inline-item"></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm">
+                        <h5>Gabriel Ramirez</h5>
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><a
+                                    class="btn btn-outline-light btn-social text-center rounded-circle" role="button"
+                                    data-bs-hover-animate="swing" href="https://www.facebook.com/Gabriel.Ramirez.017"
+                                    target="_blank"><i class="fa fa-facebook fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a
+                                    class="btn btn-outline-light btn-social text-center rounded-circle" role="button"
+                                    data-bs-hover-animate="swing" href="https://www.instagram.com/gabrielramirez17/"
+                                    target="_blank"><i class="fa fa-instagram fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a
+                                    class="btn btn-outline-light btn-social text-center rounded-circle" role="button"
+                                    data-bs-hover-animate="swing" href="https://github.com/Gabriel-Ramirez"
+                                    target="_blank"><i class="fa fa-github fa-fw"></i></a></li>
+                            <li class="list-inline-item"></li>
+                        </ul>
+                    </div>
+                    <div class="col-sm">
+                        <h5>Kike Moreno</h5>
+                        <ul class="list-inline">
+                            <li class="list-inline-item"><a
+                                    class="btn btn-outline-light btn-social text-center rounded-circle" role="button"
+                                    data-bs-hover-animate="swing" href="https://www.facebook.com/Cristian.Ayala.Chacon"
+                                    target="_blank"><i class="fa fa-facebook fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a
+                                    class="btn btn-outline-light btn-social text-center rounded-circle" role="button"
+                                    data-bs-hover-animate="swing" href="https://www.instagram.com/cristian.ayala10/"
+                                    target="_blank"><i class="fa fa-instagram fa-fw"></i></a></li>
+                            <li class="list-inline-item"><a
+                                    class="btn btn-outline-light btn-social text-center rounded-circle" role="button"
+                                    data-bs-hover-animate="swing" href="https://github.com/Cristian-Ayala"
+                                    target="_blank"><i class="fa fa-github fa-fw"></i></a></li>
+                            <li class="list-inline-item"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <div id="lastOne" class="copyright py-4 text-center text-white">
+        <div class="container"><small>TPI135</small></div>
+    </div>
+    <div class="d-lg-none scroll-to-top position-fixed rounded"><a
+            class="d-block js-scroll-trigger text-center text-white rounded" href="#page-top"><i
+                class="fa fa-chevron-up"></i></a></div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-animation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+    <script src="assets/js/footer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="urlBase.js"></script>
+    <script src="assets/js/menuVue.js"></script>
+    <script src="assets/js/script.js"></script>
+</body>
+
+</html>

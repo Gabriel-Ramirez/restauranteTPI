@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bienvenido</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600" rel="stylesheet" type="text/css" />
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div id="bg"></div>
+
+    <div class="form" id="frmLogin">
+        <ul class="tab-group">
+            <li class="tab active"><a href="#signup">Registrarse</a></li>
+            <li class="tab">
+                <a href="#login" style="font-size: large;height: 61px;">Iniciar Sesión</a
+          >
+        </li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="signup">
+          <h1>¡Registrarse es gratis!</h1>
+
+          <form>
+            <div class="top-row">
+              <div class="field-wrap">
+                <label> Nombre<span class="req">*</span> </label>
+                <input
+                  type="text"
+                  v-model="nuevoUsuario.nombre"
+                  required
+                  autocomplete="off"
+                />
+              </div>
+
+              <div class="field-wrap">
+                <label> Apellido<span class="req">*</span> </label>
+                <input
+                  type="text"
+                  required
+                  autocomplete="off"
+                  v-model="nuevoUsuario.apellido"
+                />
+              </div>
+            </div>
+
+            <div class="field-wrap">
+              <label> Correo<span class="req">*</span> </label>
+              <input
+                id="correo"
+                type="email"
+                required
+                autocomplete="off"
+                v-model="nuevoUsuario.email"
+              />
+            </div>
+
+            <div class="field-wrap">
+              <label> Nombre de Usuario<span class="req">*</span> </label>
+              <input
+                type="text"
+                required
+                v-model="nuevoUsuario.usuario"
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="field-wrap">
+              <label> Contraseña<span class="req">*</span> </label>
+              <input
+                type="password"
+                v-model="nuevoUsuario.contrasenia"
+                required
+                autocomplete="off"
+              />
+            </div>
+
+           <a @click="agregarUsuario"><input
+            type="button"
+              class="button button-block"
+              value="Registrar"
+            >
+              
+        </input></a>
+                </form>
+    </div>
+
+    <div id="login">
+        <h1>¡Bienvenido de regreso!</h1>
+
+        <form>
+            <div class="field-wrap">
+                <label> usuario<span class="req">*</span> </label>
+                <input type="text" v-model="registro.usuario" required autocomplete="on" />
+            </div>
+
+            <div class="field-wrap">
+                <label> contraseña<span class="req">*</span> </label>
+                <input type="password" v-model="registro.contrasenia" required autocomplete="off" />
+            </div>
+
+            <button class="button button-block" @click.prevent="verificar()">
+              Iniciar Sesión
+            </button>
+        </form>
+    </div>
+    </div>
+    <!-- tab-content -->
+    </div>
+    <!-- /form -->
+
+    <!-- ------------------- alerta modal---------- -->
+    <div class="alert-wrapper">
+        <div class="overlay"></div>
+        <div class="alert" id="alerta">
+            <div class="content">
+                <div class="icon">
+                    <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                </div>
+
+                <h1>¡Ups!</h1>
+                <h2>
+                    Parece que no pudimos localizar ningún usuario con esa contraseña o nombre de usuario.
+                </h2>
+                <ul>
+                    <li>
+                        Te sugerimos que vayas a <b>registrarte</b> y luego regreses para poder ingresar.
+                    </li>
+                </ul>
+            </div>
+
+            <div class="btn-wrap">
+                <button class="btn">Descartar</button>
+            </div>
+        </div>
+    </div>
+    <!-- ------------------- fin de alerta modal---------- -->
+
+    <!-- loading codepen -->
+
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+
+        <div class="loader-section section-left"></div>
+        <div class="loader-section section-right"></div>
+    </div>
+
+    <!-- loading codepen -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://use.fontawesome.com/c6a77214b9.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="./Scripts/vueLogin.js"></script>
+    <script src="./Scripts/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>PRODUCTOS</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Barlow:300,400,500,600,700,900,900i" />
+    <link rel="stylesheet" href="assets/fonts/fontawesome-all.min.css" />
+    <link rel="stylesheet" href="assets/fonts/font-awesome.min.css" />
+    <link rel="stylesheet" href="assets/fonts/ionicons.min.css" />
+    <link rel="stylesheet" href="assets/fonts/fontawesome5-overrides.min.css" />
+    <link rel="stylesheet" href="assets/css/alertify.rtl.css" />
+    <link rel="stylesheet" href="assets/css/checkboxProductos.css" />
+    <link rel="stylesheet" href="assets/css/Contact-Form-Clean.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css" />
+    <link rel="stylesheet" href="assets/css/OtherStyle.css" />
+</head>
+
+<body id="page-top">
+    <div id="top">
+        <nav class="navbar navbar-light navbar-expand-lg sticky-top bg-secondary text-uppercase" id="mainNav">
+            <div class="container-fluid">
+                <a class="navbar-brand js-scroll-trigger" href="index.html"><i class="fa fa-ravelry ocultar" id="icon"></i>sistema restaurante</a
+          ><button
+            data-toggle="collapse"
+            data-target="#navbarResponsive"
+            class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded"
+            aria-controls="navbarResponsive"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="nav navbar-nav ml-auto">
+              <li class="nav-item mx-0 mx-lg-1" role="presentation">
+                <a
+                  class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                  href="index.html"
+                  >home</a
+                >
+              </li>
+              <li class="nav-item mx-0 mx-lg-1" role="presentation">
+                <a
+                  class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                  id="ordenDelNav"
+                  href="orden.html"
+                  >orden</a
+                >
+              </li>
+              <li class="nav-item mx-0 mx-lg-1" role="presentation">
+                <a
+                  class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                  href="menu.html"
+                  >menú</a
+                >
+              </li>
+              <li
+                class="nav-item dropdown bg-primary border rounded border-primary d-flex align-items-center"
+                href="#"
+              >
+                <a
+                  class="dropdown-toggle nav-link"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                  id="admon"
+                  style="color: #fff;"
+                  href="#"
+                  >administración</a
+                >
+                <div class="dropdown-menu" role="menu">
+                  <a
+                    class="dropdown-item"
+                    role="presentation"
+                    href="categoria.html"
+                    >categoria</a
+                  ><a class="dropdown-item active" role="presentation" href="#"
+                    >producto</a
+                  >
+                </div>
+              </li>
+              <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="login.html">Cerrar Sesion</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <form>
+        <div
+          class="shadow-sm justify-content-end justify-content-lg-end input-group"
+          style="padding: 12px;font-size: 14px;font-weight: 400;line-height: 1;color: #555;text-align: center;background-color: #eee;border: 1px solid #ccc;border-radius: 4px;"
+        >
+          <div id="primDiv" class="input-group-prepend primDiv">
+            <!-- Start: textinput with icon -->
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="d-sm-flex input-group-text"
+                  ><i class="fa fa-search" style="font-size: 24px;"></i
+                ></span>
+              </div>
+              <input
+                class="form-control form-control-lg d-sm-flex justify-content-sm-start"
+                type="text"
+                id="txtBuscar"
+                placeholder="Buscar"
+                v-model="textoBusqueda"
+              />
+            </div>
+
+            <!-- End: textinput with icon -->
+          </div>
+          <div
+            class="d-flex justify-content-center justify-content-sm-center justify-content-md-end justify-content-lg-end justify-content-xl-end primDiv"
+          >
+            <button
+              class="btn btn-primary text-center border rounded shadow-sm float-right flex-shrink-1"
+              id="btnNewOrder"
+              type="button"
+              data-toggle="modal"
+              data-target="#modalNuevoProducto"
+            >
+              Agregar</button
+            ><button
+              class="btn btn-warning text-center border rounded shadow-sm float-right flex-shrink-1"
+              id="btnNewOrder"
+              type="button"
+              data-toggle="modal"
+              data-target="#modalEditarProducto"
+            >
+              Editar</button
+            ><button
+              class="btn btn-danger text-center border rounded shadow-sm float-right flex-shrink-1"
+              id="btnNewOrder"
+              type="button"
+              data-toggle="modal"
+              data-target="#modalEliminarProducto"
+            >
+              Eliminar
+            </button>
+          </div>
+        </div>
+
+        <!-- alerta al agregar -->
+        <i class="alert alert-success collapse" role="alert" id="miAlerta"
+          ><span
+            ><strong>{{ alerta.titulo }} :</strong>&nbsp;{{
+              alerta.mensaje
+            }}.</span
+          ><i class="fa fa-close close" v-on:click="cerrarAlerta();"></i
+        ></i>
+<!--este es el nav de categoria-->
+        <div id="navBarResize">
+          <div >
+            <ul class="nav nav-tabs nav-fill shadow">
+              <li
+                class="nav-item"
+                v-on:click.prevent="categoriaSelected=Cate.idCategoria;"
+                v-for="Cate in categorias"
+                style="background-color: #fff;"
+              >
+                <a
+                  class="nav-link active"
+                  role="tab"
+                  data-toggle="tab"
+                  href="#tab-1"
+                  v-on:click.prevent="categoriaSelected=Cate.idCategoria;resizeBody()"
+                  style="color: #18bc9c;background-color: #fff;"
+                  v-bind:class="{ 'navActivado': categoriaSelected==Cate.idCategoria }"
+                  >{{ Cate.nombreCategoria }}<br
+                /></a>
+                </li>
+                </ul>
+                <div class="tab-content">
+                    <div class="tab-pane active" role="tabpanel" id="tab-1">
+                        <div class="table-responsive" style="overflow: auto;max-height: 500px;">
+                            <table class="table table-hover tbl tr td" id="table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center">
+                                            <a href="#" v-on:click.prevent="orderBy('ID')">ID<i
+                              class="fa fa-long-arrow-up"
+                              v-show="orderByCampo=='ID' &amp;&amp; orderByAsc==1"
+                            ></i
+                            ><i
+                              class="fa fa-long-arrow-down"
+                              v-show="orderByCampo=='ID' &amp;&amp; orderByAsc==-1"
+                            ></i
+                          ></a>
+                                        </th>
+                                        <th class="text-center">
+                                            <a href="#" v-on:click.prevent="orderBy('NOMBRE')">NOMBRE<i class="fa fa-long-arrow-up"
+                                                v-show="orderByCampo=='NOMBRE' &amp;&amp; orderByAsc==1"></i><i
+                                                class="fa fa-long-arrow-down"
+                                                v-show="orderByCampo=='NOMBRE' &amp;&amp; orderByAsc==-1"></i></a>
+                                        </th>
+                                        <th class="text-center">
+                                            <a href="#" v-on:click.prevent="orderBy('PRECIO')">PRECIO&nbsp;<i
+                                                class="fa fa-long-arrow-up"
+                                                v-show="orderByCampo=='PRECIO' &amp;&amp; orderByAsc==1"></i><i
+                                                class="fa fa-long-arrow-down"
+                                                v-show="orderByCampo=='PRECIO' &amp;&amp; orderByAsc==-1"></i></a>
+                                        </th>
+                                        <th class="text-center">Preparado</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="(elProd, index) in productos" v-show="elProd.idCategoria==categoriaSelected &amp;&amp; buscar(index)" v-on:click="productoSelected=index;" v-bind:class="{ 'font-weight-bold' : productoSelected==index, 'backgroudColor':  productoSelected==index }">
+                                        <td class="text-center">
+                                            <br />{{ elProd.idProducto }}<br />
+                                        </td>
+                                        <td class="text-center">
+                                            <br />{{ elProd.nombreProducto }}<br />
+                                        </td>
+                                        <td class="text-center">
+                                            <br />$ {{ elProd.precio }}<br />
+                                        </td>
+                                        <td class="text-center">
+                                            <i class="fa fa-motorcycle" v-show="elProd.esPreparado==0"></i
+                          ><i
+                            class="fas fa-hamburger"
+                            v-show="elProd.esPreparado==1"
+                          ></i>
+                                        </td>
+                                    </tr>
+                                    <tr></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </form>
+    <footer id="footer" class="footer text-center">
+      <div class="container">
+                  <h4 class="text-uppercase">contáctanos</h4>
+                          <div class="row mt-3">
+                              <div class="col-sm">
+                                  <h5>Cristian Ayala</h5>
+                                  <ul class="list-inline">
+                                      <li class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" data-bs-hover-animate="swing" href="https://www.facebook.com/Cristian.Ayala.Chacon" target="_blank"><i class="fa fa-facebook fa-fw"></i></a></li>
+                                      <li
+                                          class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" data-bs-hover-animate="swing" href="https://www.instagram.com/cristian.ayala10/" target="_blank"><i class="fa fa-instagram fa-fw"></i></a></li>
+                                          <li
+                                              class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" data-bs-hover-animate="swing" href="https://github.com/Cristian-Ayala" target="_blank"><i class="fa fa-github fa-fw"></i></a></li>
+                                              <li class="list-inline-item"></li>
+                                  </ul>
+                              </div>
+                              <div class="col-sm">
+                                  <h5>Gabriel Ramirez</h5>
+                                  <ul class="list-inline">
+                                      <li class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" data-bs-hover-animate="swing" 
+                                          href="https://www.facebook.com/Gabriel.Ramirez.017" target="_blank"><i class="fa fa-facebook fa-fw"></i></a></li>
+                                      <li
+                                          class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" data-bs-hover-animate="swing" 
+                                          href="https://www.instagram.com/gabrielramirez17/" target="_blank"><i class="fa fa-instagram fa-fw"></i></a></li>
+                                          <li
+                                              class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" data-bs-hover-animate="swing" 
+                                              href="https://github.com/Gabriel-Ramirez" target="_blank"><i class="fa fa-github fa-fw"></i></a></li>
+                                              <li class="list-inline-item"></li>
+                                  </ul>
+                              </div>
+                              <div class="col-sm">
+                                  <h5>Kike Moreno</h5>
+                                  <ul class="list-inline">
+                                      <li class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" data-bs-hover-animate="swing" href="https://www.facebook.com/Cristian.Ayala.Chacon" target="_blank"><i class="fa fa-facebook fa-fw"></i></a></li>
+                                      <li
+                                          class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" data-bs-hover-animate="swing" href="https://www.instagram.com/cristian.ayala10/" target="_blank"><i class="fa fa-instagram fa-fw"></i></a></li>
+                                          <li
+                                              class="list-inline-item"><a class="btn btn-outline-light btn-social text-center rounded-circle" role="button" data-bs-hover-animate="swing" href="https://github.com/Cristian-Ayala" target="_blank"><i class="fa fa-github fa-fw"></i></a></li>
+                                              <li class="list-inline-item"></li>
+                                  </ul>
+                              </div>
+                          </div>
+      </div>
+  </footer>
+    <div id="lastOne" class="copyright py-4 text-center text-white">
+        <div class="container"><small>FPI135</small></div>
+    </div>
+    <div class="d-lg-none scroll-to-top position-fixed rounded">
+        <a class="d-block js-scroll-trigger text-center text-white rounded" href="#page-top"><i class="fa fa-chevron-up"></i
+        ></a>
+    </div>
+
+    <div class="modal fade" role="dialog" tabindex="-1" id="modalNuevoProducto" style="min-height: 500px;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header d-flex align-items-center">
+                    <h4 class="modal-title"><strong>Nuevo Producto</strong><br /></h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+                </div>
+                <div class="modal-body">
+                    <!-- Start: textinput with icon -->
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fa fa-folder-o" style="font-size: 24px;"></i
+                  ></span>
+                        </div>
+                        <select class="form-control form-control-lg d-sm-flex justify-content-sm-start" v-model="nuevoProducto.idCategoria"><optgroup label="Seleccione una Categoría"
+                    ><option
+                      v-for="option in categorias"
+                      v-bind:value="option.idCategoria"
+                    >
+                      {{ option.nombreCategoria }}
+                    </option></optgroup
+                  ></select
+                >
+              </div>
+              <!-- End: textinput with icon -->
+              <!-- Start: textinput with icon -->
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fa fa-file-o" style="font-size: 24px;"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control form-control-lg d-sm-flex justify-content-sm-start"
+                  placeholder="Nombre" v-model="nuevoProducto.nombreProducto"
+                />
+              </div>
+
+              <!-- End: textinput with icon -->
+              <!-- Start: textinput with icon -->
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fa fa-dollar" style="font-size: 24px;"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control form-control-lg d-sm-flex justify-content-sm-start"
+                  placeholder="Precio" v-model="nuevoProducto.precio"
+                />
+              </div>
+
+              <!-- End: textinput with icon -->
+              <div class="d-flex align-items-center" id="label-and-checkbox">
+                <label style="font-size: 30px;">Preparado</label>
+                <div id="checkbox" class="slideThree">
+                  <input type="checkbox" id="slideThree" value="None" v-model="nuevoProducto.esPreparado"/><label
+                    for="slideThree" 
+                  ></label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-light" type="button" data-dismiss="modal">
+                Cerrar</button
+              ><button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="agregarProducto">Guardar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        role="dialog"
+        tabindex="-1"
+        id="modalEditarProducto"
+        style="min-height: 500px;"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header d-flex align-items-center">
+              <h4 class="modal-title">
+                <strong>Editar Producto</strong><br />
+              </h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <!-- Start: textinput with icon -->
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fa fa-folder-o" style="font-size: 24px;"></i
+                  ></span>
+                </div>
+                <select
+                  class="form-control form-control-lg d-sm-flex justify-content-sm-start" v-model="productos[productoSelected].idCategoria"
+                  ><optgroup label="Seleccione una categoria"
+                    ><option v-for="option in categorias" v-bind:value="option.idCategoria">
+                        {{option.nombreCategoria}}
+                    </option></select
+                >
+              </div>
+              <!-- End: textinput with icon -->
+              <!-- Start: textinput with icon -->
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fa fa-file-o" style="font-size: 24px;"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control form-control-lg d-sm-flex justify-content-sm-start"
+                  placeholder="Nombre" v-model="productos[productoSelected].nombreProducto"
+                />
+              </div>
+
+              <!-- End: textinput with icon -->
+              <!-- Start: textinput with icon -->
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"
+                    ><i class="fa fa-dollar" style="font-size: 24px;"></i
+                  ></span>
+                </div>
+                <input
+                  type="text"
+                  class="form-control form-control-lg d-sm-flex justify-content-sm-start"
+                  placeholder="Precio"
+                  v-model="productos[productoSelected].precio"
+                />
+              </div>
+
+              <!-- End: textinput with icon -->
+              <div class="d-flex align-items-center" id="checkbox">
+                <label style="font-size: 30px;">Preparado</label>
+                <div id="checkbox" class="slideThree">
+                  <input type="checkbox" id="slide" for="slideThree" v-model="productos[productoSelected].esPreparado" /><label
+                    for="slide"
+                  ></label>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-light" type="button" data-dismiss="modal">
+                Cerrar</button
+              ><button class="btn btn-primary" type="button" data-dismiss="modal" v-on:click="modificarProducto">Modificar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="modal fade"
+        role="dialog"
+        tabindex="-1"
+        id="modalEliminarProducto"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header d-flex align-items-center">
+              <h4 class="modal-title">Eliminar producto</h4>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>¿Está seguro que quiere eliminar el producto "{{ this.productos[this.productoSelected].nombreProducto&nbsp;}}"?</p>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-light" type="button" data-dismiss="modal">
+                Cerrar</button
+              ><button class="btn btn-danger" type="button" v-on:click="eliminarProducto();" data-dismiss="modal">Eliminar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/bs-animation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+    <script src="assets/js/footer.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="assets/js/script.js"></script>
+    <script src="urlBase.js"></script>
+    <script src="assets/js/productosVue.js"></script>
+  </body>
+</html>
