@@ -83,7 +83,7 @@
                   >
                 </div>
               </li>
-              <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="login.html">Cerrar Sesion</a></li>
+              <li class="nav-item mx-0 mx-lg-1" role="presentation"><a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" @click="cerrarSesion();">Cerrar Sesion</a></li>
             </ul>
           </div>
         </div>
@@ -207,7 +207,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="(elProd, index) in productos" v-show="elProd.idCategoria==categoriaSelected &amp;&amp; buscar(index)" v-on:click="productoSelected=index;" v-bind:class="{ 'font-weight-bold' : productoSelected==index, 'backgroudColor':  productoSelected==index }">
+                                    <tr v-for="(elProd, index) in productos" v-show="elProd.idCategoria.idCategoria==categoriaSelected &amp;&amp; buscar(index)" v-on:click="productoSelected=index;" v-bind:class="{ 'font-weight-bold' : productoSelected==index, 'backgroudColor':  productoSelected==index }">
                                         <td class="text-center">
                                             <br />{{ elProd.idProducto }}<br />
                                         </td>
@@ -482,7 +482,6 @@
     <script src="assets/js/bs-animation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-    <script src="assets/js/footer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="assets/js/script.js"></script>

@@ -48,7 +48,7 @@
                                     href="productos.html">producto</a></div>
                         </li>
                         <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
-                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="login.html">Cerrar
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" @click="cerrarSesion();">Cerrar
                                 Sesion</a></li>
                     </ul>
                 </div>
@@ -65,7 +65,7 @@
                             </div>
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item">precio: {{producto.precio}}</li>
-                                <li class="list-group-item">Categoria: {{nombreCategoria(producto.idCategoria)}}</li>
+                                <li class="list-group-item">Categoria: {{nombreCategoria(producto.idCategoria.idCategoria)}}</li>
                                 <li class="list-group-item"><i class="fa fa-motorcycle"
                                         v-show="producto.esPreparado==0"></i><i class="fas fa-hamburger"
                                         v-show="producto.esPreparado==1"></i></li>
@@ -76,11 +76,13 @@
             </div>
         </div>
 
-        <footer id="footer" class="text-center footerTPI" style="position: fixed;padding: 0;">
-            <div class="copyright py-4 text-center text-white" style="padding: 0.6rem!important;">
-                <div class="container"><small>TPI135</small></div>
-            </div>
-        </footer>
+<div class="mt-5">
+    <footer id="footer" class="text-center footerTPI" style="position: fixed;padding: 0;">
+        <div class="copyright py-4 text-center text-white" style="padding: 0.6rem!important;">
+            <div class="container"><small>TPI135</small></div>
+        </div>
+    </footer>
+</div>
     </div>
     <div class="d-lg-none scroll-to-top position-fixed rounded"><a
             class="d-block js-scroll-trigger text-center text-white rounded" href="#page-top"><i
@@ -90,7 +92,6 @@
     <script src="assets/js/bs-animation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-    <script src="assets/js/footer.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="urlBase.js"></script>

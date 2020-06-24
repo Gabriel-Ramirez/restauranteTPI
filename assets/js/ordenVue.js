@@ -4,6 +4,7 @@ const vordenes = new Vue({
         ordenes: [],
         categorias: [],
         productos: [],
+        token: localStorage.getItem('token'),
         orderByCampo: "",
         orderByAsc: 1,
         textoBusqueda: "",
@@ -50,6 +51,7 @@ const vordenes = new Vue({
     },
 
     mounted: function() {
+        this.token = localStorage.getItem('token')
         this.cargarDatos();
     },
     methods: {
@@ -262,7 +264,7 @@ const vordenes = new Vue({
             this.obtenerElTotalNuevaOrden();
             this.nuevaOrden.total = this.totalNuevaOrden;
 
-            axios.post(baseUri+'/Ordens', this.nuevaOrden)
+            axios.post(baseUri+'orden', this.nuevaOrden)
                 .then(function(response) {
                     console.log(response)
                     vordenes.ordenSelected = response.data;
@@ -363,7 +365,18 @@ const vordenes = new Vue({
 
         cargarDatos: function() {
             //cargando las ordenes
-            axios.get(baseUri+'/Ordens')
+            // async function leertoken(){
+            //     return await m;
+            // }
+
+            console.log(this.token);
+            axios.get(baseUri+'orden', {
+                headers:{
+                    'Content-Type':'application/json;charset=utf-8',
+                    'jwt': this.token,
+                    'Access-Control-Allow-Origin': '*'
+                }
+                })
                 .then(function(res) {
                     vordenes.ordenes = res.data;
                 })
@@ -373,7 +386,7 @@ const vordenes = new Vue({
                 });
 
             //PRODUCTOS
-            axios.get(baseUri+'/Productos')
+            axios.get(baseUri+'producto')
                 .then(function(res) {
                     vordenes.productos = res.data;
                 })
@@ -383,7 +396,7 @@ const vordenes = new Vue({
                 });
 
             //Cargar Categorias
-            axios.get(baseUri+'/Categoria')
+            axios.get(baseUri+'categoria')
                 .then(function(res) {
                     vordenes.categorias = res.data;
                 })
@@ -393,7 +406,7 @@ const vordenes = new Vue({
 
 
             //Cargar detalle de orden
-            axios.get(baseUri+'/DetalleOrdens')
+            axios.get(baseUri+'detalleorden')
                 .then(function(res) {
                     vordenes.detalleOrdenes = res.data;
                 })
@@ -402,7 +415,7 @@ const vordenes = new Vue({
                 });
 
             //Detalle Orden
-            axios.get(baseUri+'/DetalleOrdens')
+            axios.get(baseUri+'detalleorden')
                 .then(function(res) {
                     vordenes.detalleOrden = res.data;
                 })
@@ -422,7 +435,7 @@ const vordenes = new Vue({
         eliminarOrden: function() {
             if (this.ordenSelected.estado != ("C" || "c")) {
                 console.log("Eliminar orden")
-                axios.delete(baseUri+'DetalleOrdens/' + this.ordenSelected.idOrden)
+                axios.delete(baseUri+'detalleorden/' + this.ordenSelected.idOrden)
                     .then(function(res) {
                         axios.delete(baseUri+'/Ordens/' + vordenes.ordenSelected.idOrden)
                             .then(function(res) {
