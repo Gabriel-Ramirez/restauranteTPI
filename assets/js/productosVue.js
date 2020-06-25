@@ -102,7 +102,7 @@ var vueProduct = new Vue({
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Headers': 'X-Custom-Header'
                 }
                 })
                 .then(function(res) {
@@ -117,7 +117,7 @@ var vueProduct = new Vue({
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Headers': 'X-Custom-Header'
                 }
                 })
                 .then(function(res) {
@@ -134,7 +134,7 @@ var vueProduct = new Vue({
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Headers': 'X-Custom-Header'
                 }
                 }, this.nuevoProducto)
                 .then(function(res) {
@@ -155,7 +155,7 @@ var vueProduct = new Vue({
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Headers': 'X-Custom-Header'
                 }
                 }, this.productos[this.productoSelected])
                 .then(function(res) {
@@ -176,7 +176,7 @@ var vueProduct = new Vue({
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Headers': 'X-Custom-Header'
                 }
                 })
                 .then(function(res) {

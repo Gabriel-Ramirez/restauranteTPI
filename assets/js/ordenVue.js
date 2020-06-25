@@ -370,11 +370,11 @@ const vordenes = new Vue({
             // }
 
             console.log(this.token);
-            axios.get(baseUri+'orden', {
+            axios.get(baseUri+'/orden', {
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Origin': '*'
+                    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
                 }
                 })
                 .then(function(res) {
@@ -386,11 +386,11 @@ const vordenes = new Vue({
                 });
 
             //PRODUCTOS
-            axios.get(baseUri+'producto', {
+            axios.get(baseUri+'/producto', {
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Headers': 'Content-Type, jtw, Access-Control-Allow-Origin, Access-Control-Allow-Methods'
                 }
                 })
                 .then(function(res) {
@@ -402,11 +402,11 @@ const vordenes = new Vue({
                 });
 
             //Cargar Categorias
-            axios.get(baseUri+'categoria',{
+            axios.get(baseUri+'/categoria',{
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Headers': 'Content-Type, jtw, Access-Control-Allow-Origin, Access-Control-Allow-Methods'
                 }
                 })
                 .then(function(res) {
@@ -418,11 +418,11 @@ const vordenes = new Vue({
 
 
             //Cargar detalle de orden
-            axios.get(baseUri+'detalleorden', {
+            axios.get(baseUri+'/detalleorden', {
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Headers': 'Content-Type, jtw, Access-Control-Allow-Origin, Access-Control-Allow-Methods'
                 }
                 })
                 .then(function(res) {
@@ -433,11 +433,11 @@ const vordenes = new Vue({
                 });
 
             //Detalle Orden
-            axios.get(baseUri+'detalleorden', {
+            axios.get(baseUri+'/detalleorden', {
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Origin': '*'
+                    'Access-Control-Allow-Headers': 'Content-Type, jtw, Access-Control-Allow-Origin, Access-Control-Allow-Methods'
                 }
                 })
                 .then(function(res) {
@@ -463,7 +463,7 @@ const vordenes = new Vue({
                     headers:{
                         'Content-Type':'application/json;charset=utf-8',
                         'jwt': this.token,
-                        'Access-Control-Allow-Origin': '*'
+                        'Access-Control-Allow-Headers': 'X-Custom-Header, jwt'
                     }
                     })
                     .then(function(res) {
@@ -471,7 +471,7 @@ const vordenes = new Vue({
                             headers:{
                                 'Content-Type':'application/json;charset=utf-8',
                                 'jwt': this.token,
-                                'Access-Control-Allow-Origin': '*'
+                                'Access-Control-Allow-Headers': 'X-Custom-Header, jwt'
                             }
                             })
                             .then(function(res) {
@@ -552,7 +552,7 @@ const vordenes = new Vue({
                             headers:{
                                 'Content-Type':'application/json;charset=utf-8',
                                 'jwt': this.token,
-                                'Access-Control-Allow-Origin': '*'
+                                'Access-Control-Allow-Headers': 'X-Custom-Header'
                             }
                             })
                         .then(response => {
