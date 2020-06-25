@@ -386,7 +386,13 @@ const vordenes = new Vue({
                 });
 
             //PRODUCTOS
-            axios.get(baseUri+'producto')
+            axios.get(baseUri+'producto', {
+                headers:{
+                    'Content-Type':'application/json;charset=utf-8',
+                    'jwt': this.token,
+                    'Access-Control-Allow-Origin': '*'
+                }
+                })
                 .then(function(res) {
                     vordenes.productos = res.data;
                 })
@@ -396,7 +402,13 @@ const vordenes = new Vue({
                 });
 
             //Cargar Categorias
-            axios.get(baseUri+'categoria')
+            axios.get(baseUri+'categoria',{
+                headers:{
+                    'Content-Type':'application/json;charset=utf-8',
+                    'jwt': this.token,
+                    'Access-Control-Allow-Origin': '*'
+                }
+                })
                 .then(function(res) {
                     vordenes.categorias = res.data;
                 })
@@ -406,7 +418,13 @@ const vordenes = new Vue({
 
 
             //Cargar detalle de orden
-            axios.get(baseUri+'detalleorden')
+            axios.get(baseUri+'detalleorden', {
+                headers:{
+                    'Content-Type':'application/json;charset=utf-8',
+                    'jwt': this.token,
+                    'Access-Control-Allow-Origin': '*'
+                }
+                })
                 .then(function(res) {
                     vordenes.detalleOrdenes = res.data;
                 })
@@ -415,7 +433,13 @@ const vordenes = new Vue({
                 });
 
             //Detalle Orden
-            axios.get(baseUri+'detalleorden')
+            axios.get(baseUri+'detalleorden', {
+                headers:{
+                    'Content-Type':'application/json;charset=utf-8',
+                    'jwt': this.token,
+                    'Access-Control-Allow-Origin': '*'
+                }
+                })
                 .then(function(res) {
                     vordenes.detalleOrden = res.data;
                 })
@@ -435,9 +459,21 @@ const vordenes = new Vue({
         eliminarOrden: function() {
             if (this.ordenSelected.estado != ("C" || "c")) {
                 console.log("Eliminar orden")
-                axios.delete(baseUri+'detalleorden/' + this.ordenSelected.idOrden)
+                axios.delete(baseUri+'detalleorden/' + this.ordenSelected.idOrden, {
+                    headers:{
+                        'Content-Type':'application/json;charset=utf-8',
+                        'jwt': this.token,
+                        'Access-Control-Allow-Origin': '*'
+                    }
+                    })
                     .then(function(res) {
-                        axios.delete(baseUri+'/Ordens/' + vordenes.ordenSelected.idOrden)
+                        axios.delete(baseUri+'orden/' + vordenes.ordenSelected.idOrden, {
+                            headers:{
+                                'Content-Type':'application/json;charset=utf-8',
+                                'jwt': this.token,
+                                'Access-Control-Allow-Origin': '*'
+                            }
+                            })
                             .then(function(res) {
                                 console.log("DELETE Orden");
                                 vordenes.mostrarAlertaCambio("Exito:", "La orden se eliminó de la base de datos");
@@ -503,7 +539,7 @@ const vordenes = new Vue({
                 console.log("verificacion de efectivo");
                 if (this.efectivo > this.ordenSelected.total) {
                     this.cambio = this.efectivo - this.ordenSelected.total;
-                    axios.put(baseUri+'/Ordens/' + this.ordenSelected.idOrden, {
+                    axios.put(baseUri+'orden/' + this.ordenSelected.idOrden, {
                             "fecha": this.ordenSelected.fecha,
                             "mesero": this.ordenSelected.mesero,
                             "mesa": this.ordenSelected.mesa,
@@ -511,8 +547,16 @@ const vordenes = new Vue({
                             "estado": "C",
                             "total": this.ordenSelected.total,
                             "observacion": this.ordenSelected.observacion
-                        })
+                        },
+                        {
+                            headers:{
+                                'Content-Type':'application/json;charset=utf-8',
+                                'jwt': this.token,
+                                'Access-Control-Allow-Origin': '*'
+                            }
+                            })
                         .then(response => {
+                            
                             this.mostrarAlertaCambio("Exito: ", "Cambio:$" + (this.cambio).toFixed(2) + "   Total:$" + this.ordenSelected.total + "   Efectivo:$" + this.efectivo);
                             this.cargarDatos();
                         })

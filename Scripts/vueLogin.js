@@ -45,7 +45,7 @@ var vueLogin = new Vue({
                 if(response.status === 200){
                     localStorage.setItem('token', response.headers.jwt);
                     window.location.assign(
-                        baseUriFront+"/orden.html"
+                        baseUriFront+"/index.html"
                     );
                     $("body").removeClass("loaded");
 

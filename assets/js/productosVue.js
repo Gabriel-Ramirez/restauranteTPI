@@ -172,7 +172,13 @@ var vueProduct = new Vue({
         },
         eliminarProducto: function() {
             console.log();
-            axios.delete(baseUri+'producto/' + this.productos[this.productoSelected].idProducto)
+            axios.delete(baseUri+'producto/' + this.productos[this.productoSelected].idProducto,                         {
+                headers:{
+                    'Content-Type':'application/json;charset=utf-8',
+                    'jwt': this.token,
+                    'Access-Control-Allow-Origin': '*'
+                }
+                })
                 .then(function(res) {
                     console.log("DELETE PRODUCTO");
                     vueProduct.cargarDatos();

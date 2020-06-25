@@ -129,7 +129,7 @@ var vueProduct = new Vue({
 
         },
         agregarProducto: function() {
-            axios.post(baseUri+'/Productos', {headers}, this.nuevoProducto)
+            axios.post(baseUri+'producto', {headers}, this.nuevoProducto)
                 .then(function(res) {
                     vueProduct.nuevoProducto.nombreProducto = "";
                     vueProduct.nuevoProducto.precio = 0;
@@ -144,7 +144,7 @@ var vueProduct = new Vue({
                 });
         },
         modificarProducto: function() {
-            axios.put(baseUri+'/Productos', this.productos[this.productoSelected])
+            axios.put(baseUri+'producto', {headers}, this.productos[this.productoSelected])
                 .then(function(res) {
                     console.log("UPDATED PRODUCTO");
                     vueProduct.mostrarAlerta("Producto Modificado", "Se modifico el producto satisfactoriamente");
@@ -159,7 +159,7 @@ var vueProduct = new Vue({
         },
         eliminarProducto: function() {
             console.log();
-            axios.delete(baseUri+'/Productos/' + this.productos[this.productoSelected].idProducto)
+            axios.delete(baseUri+'producto/' + this.productos[this.productoSelected].idProducto, {headers})
                 .then(function(res) {
                     console.log("DELETE PRODUCTO");
                     vueProduct.cargarDatos();
