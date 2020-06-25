@@ -9,6 +9,8 @@ var vueProduct = new Vue({
             titulo: "Error",
             mensaje: "Texto"
         },
+        token: '',
+        headers: '',
         orderByCampo: "",
         orderByAsc: 1,
         textoBusqueda: "",
@@ -25,6 +27,11 @@ var vueProduct = new Vue({
         },
     },
     methods: {
+         headers:{
+            'Content-Type':'application/json;charset=utf-8',
+            'jwt': this.token,
+            'Access-Control-Allow-Origin': '*',
+        },
         mostrarAlerta: function(titu, msg) {
             this.alerta.titulo = titu;
             this.alerta.mensaje = msg;
@@ -97,27 +104,32 @@ var vueProduct = new Vue({
         },
         cargarDatos: function() {
             //cargando las categorias
-            axios.get(baseUri+'/Categoria')
+            headers={
+                'Content-Type':'application/json;charset=utf-8',
+                'jwt': this.token,
+                'Access-Control-Allow-Origin': '*',
+            }
+            
+            axios.get(baseUri+'categoria', {headers})
                 .then(function(res) {
                     vueProduct.categorias = res.data;
                 })
                 .catch(function(error) {
-                    // handle error
                     console.log(error);
                 });
+
             //PRODUCTOS
-            axios.get(baseUri+'/Productos')
+            axios.get(baseUri+'producto', {headers})
                 .then(function(res) {
                     vueProduct.productos = res.data;
                 })
                 .catch(function(error) {
-                    // handle error
                     console.log(error);
                 });
 
         },
         agregarProducto: function() {
-            axios.post(baseUri+'/Productos', this.nuevoProducto)
+            axios.post(baseUri+'producto', {headers}, this.nuevoProducto)
                 .then(function(res) {
                     vueProduct.nuevoProducto.nombreProducto = "";
                     vueProduct.nuevoProducto.precio = 0;
@@ -132,7 +144,7 @@ var vueProduct = new Vue({
                 });
         },
         modificarProducto: function() {
-            axios.put(baseUri+'/Productos', this.productos[this.productoSelected])
+            axios.put(baseUri+'producto', {headers}, this.productos[this.productoSelected])
                 .then(function(res) {
                     console.log("UPDATED PRODUCTO");
                     vueProduct.mostrarAlerta("Producto Modificado", "Se modifico el producto satisfactoriamente");
@@ -147,7 +159,7 @@ var vueProduct = new Vue({
         },
         eliminarProducto: function() {
             console.log();
-            axios.delete(baseUri+'/Productos/' + this.productos[this.productoSelected].idProducto)
+            axios.delete(baseUri+'producto/' + this.productos[this.productoSelected].idProducto, {headers})
                 .then(function(res) {
                     console.log("DELETE PRODUCTO");
                     vueProduct.cargarDatos();
@@ -165,6 +177,8 @@ var vueProduct = new Vue({
     },
 
     mounted: function() {
+        this.token = localStorage.getItem('token');
+        
         this.cargarDatos();
     },
 

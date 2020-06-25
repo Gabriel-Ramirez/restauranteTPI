@@ -13,15 +13,10 @@ var vueLogin = new Vue({
             nombre: "",
             usuario: ""
         },
-        nuevoCalendario: {
-            color: "CCEEFF ",
-            idCalendario: 0,
-            nombre: "Calendario",
-            usuario: ""
-        },
+
         registro: {
-            usuario: "",
-            contrasenia: ""
+            nombre: "",
+            password: ""
         },
 
         usuario: "",
@@ -41,54 +36,73 @@ var vueLogin = new Vue({
             $("body").addClass("loaded");
         },
 
-        verificar() {
+        verificar2(){
             $("body").removeClass("loaded");
+            console.log(vueLogin.registro);
+            axios.post(baseUri+"usuario/login", vueLogin.registro)
+            .then(function(response){
+                console.log(response.status);
+                if(response.status === 200){
+                    localStorage.setItem('token', response.headers.jwt);
+                    window.location.assign(
+                        baseUriFront+"/index.html"
+                    );
+                    $("body").removeClass("loaded");
 
-            if (
-                typeof vueLogin.registro.usuario != "undefined" &&
-                typeof vueLogin.registro.contrasenia != "undefined" &&
-                vueLogin.registro.usuario.trim() != "" &&
-                vueLogin.registro.contrasenia.trim() != ""
-            ) {
-                axios
-                    .get(
-                        "https://tpi-project.herokuapp.com/tpi_project/tpi_calendario/usuario/" +
-                        vueLogin.registro.usuario
-                    )
-                    .then(function(response) {
-                        vueLogin.usuario = response.data;
-                        console.log(vueLogin.usuario);
-                        if (vueLogin.usuario != "") {
-                            console.log("zhi");
-                            if (
-                                vueLogin.usuario.contrasenia === vueLogin.registro.contrasenia
-                            ) {
-                                console.log("Encontrado");
-                                localStorage.setItem(
-                                    "nombreUsuario",
-                                    vueLogin.registro.usuario
-                                );
-                                window.location.assign(
-                                    "https://gabriel-ramirez.github.io/FrontedTPICalendario/pages/calendario.html"
-                                );
-                            } else {
-                                alertaModal();
-                            }
-                        } else {
-                            console.log("no");
-                            alertaModal();
-                        }
-                        $("body").addClass("loaded");
-                    })
-                    .catch(function(error) {
-                        console.log(error);
-                        $("body").addClass("loaded");
-                    });
-            } else {
+                }
+
+            })
+            .catch(function(e){
                 $("body").addClass("loaded");
-                alertaModal();
-            }
+                this.alertaModal();
+            })
+
         },
+        // verificar() {
+        //     $("body").removeClass("loaded");
+
+        //     if (
+        //         typeof vueLogin.registro.usuario != "undefined" &&
+        //         typeof vueLogin.registro.contrasenia != "undefined" &&
+        //         vueLogin.registro.usuario.trim() != "" &&
+        //         vueLogin.registro.contrasenia.trim() != ""
+        //     ) {
+        //         axios
+        //             .post(baseUri+"usuario/login",vueLogin.registro.usuario)
+        //             .then(function(response) {
+        //                 vueLogin.usuario = response.data;
+        //                 console.log(vueLogin.usuario);
+        //                 if (vueLogin.usuario != "") {
+        //                     if (
+        //                         vueLogin.usuario.contrasenia === vueLogin.registro.contrasenia
+        //                     ) {
+        //                         console.log("Encontrado");
+        //                         localStorage.setItem(
+        //                             "nombreUsuario",
+        //                             vueLogin.registro.usuario
+        //                         );
+        //                         window.location.assign(
+        //                             "http://127.0.0.1:5500/orden.html"
+        //                         );
+        //                     } else {
+        //                         alertaModal();
+        //                     }
+        //                 } else {
+        //                     console.log("no");
+        //                     alertaModal();
+        //                 }
+        //                 $("body").addClass("loaded");
+        //             })
+        //             .catch(function(error) {
+        //                 console.log(error);
+        //                 $("body").addClass("loaded");
+        //             });
+        //     } else {
+        //         $("body").addClass("loaded");
+        //         alertaModal();
+        //     }
+        // },
+       
         agregarUsuario() {
             $("body").removeClass("loaded");
             // validacion
@@ -100,7 +114,7 @@ var vueLogin = new Vue({
             if (yourFormElement.reportValidity()) {
                 axios
                     .post(
-                        "https://tpi-project.herokuapp.com/tpi_project/tpi_calendario/usuario",
+                        baseUri+"/usuario",
                         this.nuevoUsuario
                     )
                     .then(function(response) {
