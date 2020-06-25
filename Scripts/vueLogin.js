@@ -39,7 +39,7 @@ var vueLogin = new Vue({
         verificar2(){
             $("body").removeClass("loaded");
             console.log(vueLogin.registro);
-            axios.post(baseUri+"usuario/login", vueLogin.registro)
+            axios.post(baseUri+"/usuario/login", vueLogin.registro)
             .then(function(response){
                 console.log(response.status);
                 if(response.status === 200){

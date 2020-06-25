@@ -25,7 +25,7 @@ const vueApp = new Vue({
 
     methods: {
         agregarCategoria() {
-            axios.post(baseUri+'/Categoria', this.nuevaCategoria)
+            axios.post(baseUri+'/categoria', this.nuevaCategoria)
                 .then(function(response) {
                     vueApp.cargarDatos();
                     vueApp.nuevaCategoria = {
