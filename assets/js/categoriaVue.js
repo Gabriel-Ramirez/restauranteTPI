@@ -15,18 +15,20 @@ const vueApp = new Vue({
         nuevaCategoria: {
             "idCategoria": 0,
             "nombreCategoria": ""
-        }
+        },
+        token: ""
 
     },
 
-    mounted: function() {
+    mounted: function () {
         this.cargarDatos();
+        this.token = localStorage.getItem("jwt");
     },
 
     methods: {
         agregarCategoria() {
-            axios.post(baseUri+'/Categoria', this.nuevaCategoria)
-                .then(function(response) {
+            axios.post(baseUri + '/Categoria', this.nuevaCategoria)
+                .then(function (response) {
                     vueApp.cargarDatos();
                     vueApp.nuevaCategoria = {
                         "idCategoria": 0,
@@ -34,7 +36,7 @@ const vueApp = new Vue({
                     }
                     vueApp.mostrarAlerta('Exito', 'Se agrego la categoria correctamente');
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log(error);
                     vueApp.mostrarAlerta('Error', error);
                 });
@@ -47,32 +49,32 @@ const vueApp = new Vue({
 
 
         editarCategoria() {
-            axios.put(baseUri+'/Categoria', {
+            axios.put(baseUri + '/Categoria', {
                     idCategoria: this.categoriaSeleccionada.idCategoria,
                     nombreCategoria: this.categoriaSeleccionada.nombreCategoria
                 })
                 .then(response => {
                     this.mostrarAlerta("Exito", "Se edito con Exito")
-                        // console.log(response);
+                    // console.log(response);
                 })
                 .catch(error => {
                     this.mostrarAlerta("Error", error)
-                        // console.log(err);
+                    // console.log(err);
                 });
 
         },
 
 
-        eliminarCategoria: function() {
+        eliminarCategoria: function () {
 
-            axios.delete(baseUri+'/Categoria/' + this.categoriaSeleccionada.idCategoria)
-                .then(function(res) {
+            axios.delete(baseUri + '/Categoria/' + this.categoriaSeleccionada.idCategoria)
+                .then(function (res) {
                     console.log("DELETE PRODUCTO");
                     vueApp.cargarDatos();
                     vueApp.mostrarAlerta("Producto Eliminado", "El producto se eliminó de la base de datos");
 
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     // handle error
                     vueApp.mostrarAlerta("Error:", error);
 
@@ -82,8 +84,8 @@ const vueApp = new Vue({
 
         nombreCategoria() {
             return this.categoriaSeleccionada.nombreCategoria
-                // this.catSelected = this.categorias.find(cat =>{
-                //   return cat.idCategoria === this.categoriaSeleccionada
+            // this.catSelected = this.categorias.find(cat =>{
+            //   return cat.idCategoria === this.categoriaSeleccionada
 
             // });
             // console.log(this.catSelected.nombreCategoria);
@@ -91,39 +93,45 @@ const vueApp = new Vue({
 
 
         //consume la API con axios
-        cargarDatos: function() {
+        cargarDatos: function () {
             //Carga categorias
-            axios.get(baseUri+'/Categoria')
-                .then(function(response) {
+            axios.get(baseUri + '/categoria', {
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8',
+                        'jwt': this.token,
+                        "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
+                    }
+                })
+                .then(function (response) {
                     vueApp.categorias = response.data;
                     console.log("se cargaron los datos");
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     console.log(error);
 
                 });
 
-            //Carga productos
-            axios.get(baseUri+'/Productos')
-                .then(function(response) {
-                    vueApp.productos = response.data;
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
+            // //Carga productos
+            // axios.get(baseUri+'/producto')
+            //     .then(function(response) {
+            //         vueApp.productos = response.data;
+            //     })
+            //     .catch(function(error) {
+            //         console.log(error);
+            //     });
         },
 
-        mostrarAlerta: function(titu, msg) {
+        mostrarAlerta: function (titu, msg) {
             this.alerta.titulo = titu;
             this.alerta.mensaje = msg;
 
             $("#miAlerta").show('fade');
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#miAlerta").hide('fade');
             }, 5000);
 
         },
-        cerrarAlerta: function() {
+        cerrarAlerta: function () {
             $('#miAlerta').hide('fade');
         },
 
