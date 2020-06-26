@@ -80,7 +80,7 @@ const vueApp = new Vue({
 
         eliminarCategoria: function () {
 
-            axios.delete(baseUri + '/Categoria/' + this.categoriaSeleccionada.idCategoria,{
+            axios.delete(baseUri + '/categoria/' + this.categoriaSeleccionada.idCategoria,{
                 headers: this.headers
             })
                 .then(function (res) {

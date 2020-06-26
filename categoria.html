@@ -49,7 +49,8 @@
                                     href="productos.html">producto</a></div>
                         </li>
                         <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
-                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" @click="cerrarSesion();">Cerrar
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger"
+                                @click="cerrarSesion();">Cerrar
                                 Sesion</a></li>
                     </ul>
                 </div>
@@ -91,8 +92,8 @@
                     </thead>
                     <tbody>
                         <tr>
-                        <tr v-for="(categoria,index) in categorias"
-                            v-on:click.prevent="categoriaSeleccionada=categoria">
+                        <tr v-for="(categoria,index) in categorias" v-on:click.prevent="categoriaSeleccionada=categoria"
+                            style="cursor: pointer;user-select: none;">
                             <td class="text-center">{{categoria.idCategoria}}</td>
                             <td class="text-center">{{categoria.nombreCategoria}}</td>
                             <td class="text-center"><button class="btn btn-outline-primary btn-sm" type="button"
