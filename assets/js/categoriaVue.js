@@ -102,9 +102,13 @@ const vueApp = new Vue({
         //consume la API con axios
         cargarDatos: function () {
             //Carga categorias
+<<<<<<< HEAD
             axios.get(baseUri + '/categoria', {
                     headers: this.headers
                 })
+=======
+            axios.get(baseUri + '/categoria', {headers})
+>>>>>>> 66e267081f138e11472ac8ed5614a4dcc3e32bea
                 .then(function (response) {
                     vueApp.categorias = response.data;
                     console.log("se cargaron los datos");
