@@ -16,19 +16,24 @@ const vueApp = new Vue({
             "idCategoria": 0,
             "nombreCategoria": ""
         },
-        token: ""
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'jwt': localStorage.getItem("token"),
+            "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
+        }
 
     },
 
     mounted: function () {
         this.cargarDatos();
-        this.token = localStorage.getItem("jwt");
     },
 
     methods: {
         agregarCategoria() {
-            axios.post(baseUri+'/categoria', this.nuevaCategoria)
-                .then(function(response) {
+            axios.post(baseUri + '/categoria', this.nuevaCategoria,{
+                headers: this.headers
+            })
+                .then(function (response) {
                     vueApp.cargarDatos();
                     vueApp.nuevaCategoria = {
                         "idCategoria": 0,
@@ -44,14 +49,16 @@ const vueApp = new Vue({
 
         mostrarCategoria() {
             console.log(this.categorias[this.categoriaSeleccionada]);
-
         },
 
 
         editarCategoria() {
-            axios.put(baseUri + '/Categoria', {
+            axios.put(baseUri + '/categoria', {
+                //Este es el body de la request que se envia
                     idCategoria: this.categoriaSeleccionada.idCategoria,
                     nombreCategoria: this.categoriaSeleccionada.nombreCategoria
+                }, {
+                    headers: this.headers
                 })
                 .then(response => {
                     this.mostrarAlerta("Exito", "Se edito con Exito")
@@ -96,11 +103,7 @@ const vueApp = new Vue({
         cargarDatos: function () {
             //Carga categorias
             axios.get(baseUri + '/categoria', {
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8',
-                        'jwt': this.token,
-                        "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
-                    }
+                    headers: this.headers
                 })
                 .then(function (response) {
                     vueApp.categorias = response.data;
@@ -120,7 +123,7 @@ const vueApp = new Vue({
             //         console.log(error);
             //     });
         },
-        
+
         mostrarAlerta: function (titu, msg) {
             this.alerta.titulo = titu;
             this.alerta.mensaje = msg;
@@ -138,7 +141,6 @@ const vueApp = new Vue({
     },
 
     computed: {
-   
         categoriaActiva() {
             this.categoriaEdit = this.categorias.find(it => {
                 console.log(this.categoriaSeleccionada.idCategoria);
