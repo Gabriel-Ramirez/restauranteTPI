@@ -19,7 +19,8 @@ const vueApp = new Vue({
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
             'jwt': localStorage.getItem("token"),
-            "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
+            "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje",
+            
         }
 
     },
@@ -30,10 +31,13 @@ const vueApp = new Vue({
 
     methods: {
         agregarCategoria() {
+            console.log("..........."+this.headers.jwt);
             axios.post(baseUri + '/categoria', this.nuevaCategoria,{
                 headers: this.headers
             })
+        
                 .then(function (response) {
+                   
                     vueApp.cargarDatos();
                     vueApp.nuevaCategoria = {
                         "idCategoria": 0,
@@ -43,7 +47,9 @@ const vueApp = new Vue({
                 })
                 .catch(function (error) {
                     console.log(error);
+                    
                     vueApp.mostrarAlerta('Error', error);
+                    
                 });
         },
 

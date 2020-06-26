@@ -44,6 +44,7 @@ var vueLogin = new Vue({
                 console.log(response.status);
                 if(response.status === 200){
                     localStorage.setItem('token', response.headers.jwt);
+                    console.log("................................"+response.headers.jwt);
                     window.location.assign(
                         baseUriFront+"/index.html"
                     );
