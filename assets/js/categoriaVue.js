@@ -54,12 +54,12 @@ const vueApp = new Vue({
 
 
         editarCategoria() {
-            axios.put(baseUri + '/categoria', {
+           axios.put(baseUri + '/categoria', {
                 //Este es el body de la request que se envia
                     idCategoria: this.categoriaSeleccionada.idCategoria,
                     nombreCategoria: this.categoriaSeleccionada.nombreCategoria
                 }, {
-                    headers: this.headers
+                    headers
                 })
                 .then(response => {
                     this.mostrarAlerta("Exito", "Se edito con Exito")
