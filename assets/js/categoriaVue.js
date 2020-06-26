@@ -62,11 +62,12 @@ const vueApp = new Vue({
                     headers
                 })
                 .then(response => {
-                    this.mostrarAlerta("Exito", "Se edito con Exito")
+                    console.log("se edito con exito");
+                    vueApp.mostrarAlerta("Exito", "Se edito con Exito")
                     // console.log(response);
                 })
                 .catch(error => {
-                    this.mostrarAlerta("Error", error)
+                    vueApp.mostrarAlerta("Error", error)
                     // console.log(err);
                 });
 
