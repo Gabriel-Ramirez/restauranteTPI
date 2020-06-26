@@ -263,7 +263,7 @@
                 <span class="input-group-text"><i class="fa fa-file-o" style="font-size: 24px;"></i></span>
               </div>
               <input type="text" class="form-control form-control-lg d-sm-flex justify-content-sm-start"
-                placeholder="Nombre" v-model="productos[productoSelected].nombreProducto" />
+                placeholder="Nombre" v-model="productos[productoSelected].nombreProducto" v-if="productos.length>0"/>
             </div>
 
             <!-- End: textinput with icon -->
@@ -273,7 +273,7 @@
                 <span class="input-group-text"><i class="fa fa-dollar" style="font-size: 24px;"></i></span>
               </div>
               <input type="text" class="form-control form-control-lg d-sm-flex justify-content-sm-start"
-                placeholder="Precio" v-model="productos[productoSelected].precio" />
+                placeholder="Precio" v-model="productos[productoSelected].precio" v-if="productos.length>0"/>
             </div>
 
             <!-- End: textinput with icon -->
@@ -281,7 +281,7 @@
               <label style="font-size: 30px;">Preparado</label>
               <div id="checkbox" class="slideThree">
                 <input type="checkbox" id="slide" for="slideThree"
-                  v-model="productos[productoSelected].esPreparado" /><label for="slide"></label>
+                  v-model="productos[productoSelected].esPreparado" v-if="productos.length>0"/><label for="slide"></label>
               </div>
             </div>
           </div>
@@ -306,7 +306,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <p>¿Está seguro que quiere eliminar el producto
+            <p v-if="productos.length>0">¿Está seguro que quiere eliminar el producto
               "{{ this.productos[this.productoSelected].nombreProducto&nbsp;}}"?</p>
           </div>
           <div class="modal-footer">
