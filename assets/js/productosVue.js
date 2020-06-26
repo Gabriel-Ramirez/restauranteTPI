@@ -11,8 +11,8 @@ var vueProduct = new Vue({
         },
         headers: {
             'Content-Type': 'application/json;charset=utf-8',
-            'jwt': localStorage.getItem("token"),
-            "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
+            'JWT': localStorage.getItem("token"),
+            "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, JWT, mensaje"
         },
         orderByCampo: "",
         orderByAsc: 1,
@@ -27,10 +27,6 @@ var vueProduct = new Vue({
             "nombreProducto": "",
             "precio": 0,
             "esPreparado": 0
-        },headers: {
-            'Content-Type': 'application/json;charset=utf-8',
-            'jwt': localStorage.getItem("token"),
-            "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje",
         }
     },
 
@@ -120,7 +116,7 @@ var vueProduct = new Vue({
 
         },
         agregarProducto: function () {
-            console.log('......'+this.headers.jwt);
+            console.log('......'+this.headers.JWT);
             axios.post(baseUri + '/producto', this.nuevoProducto, {headers: this.headers} )
                 .then(function (res) {
                     vueProduct.nuevoProducto= {
@@ -142,8 +138,14 @@ var vueProduct = new Vue({
         },
         modificarProducto: function () {
             axios.put(baseUri + '/producto', {
-                    headers
-                }, this.productos[this.productoSelected])
+                    "esPreparado": this.productos[this.productoSelected].esPreparado,
+                    "idCategoria": this.productos[this.productoSelected].idCategoria.idCategoria,
+                    "idProducto": this.productos[this.productoSelected].idProducto,
+                    "nombreProducto": this.productos[this.productoSelected].nombreProducto,
+                    "precio": this.productos[this.productoSelected].precio
+                }, {
+                    headers: this.headers
+                })
                 .then(function (res) {
                     console.log("UPDATED PRODUCTO");
                     vueProduct.mostrarAlerta("Producto Modificado", "Se modifico el producto satisfactoriamente");
