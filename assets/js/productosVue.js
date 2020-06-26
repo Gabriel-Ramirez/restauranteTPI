@@ -157,16 +157,13 @@ var vueProduct = new Vue({
                 });
         },
         eliminarProducto: function () {
-            console.log();
-            axios.delete(baseUri + '/producto/' + this.productos[this.productoSelected].idProducto, {
-                    headers
-                })
+            console.log('......'+this.headers.jwt);
+            axios.delete(baseUri + '/producto/' + this.productos[this.productoSelected].idProducto, {headers: this.headers})
                 .then(function (res) {
                     console.log("DELETE PRODUCTO");
                     vueProduct.cargarDatos();
                     vueProduct.mostrarAlerta("Producto Eliminado", "El producto se eliminó de la base de datos");
-
-                })
+               })
                 .catch(function (error) {
                     // handle error
                     vueProduct.mostrarAlerta("Error:", error);
