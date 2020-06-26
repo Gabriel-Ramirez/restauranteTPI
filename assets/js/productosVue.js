@@ -25,20 +25,20 @@ var vueProduct = new Vue({
         },
     },
     methods: {
-        mostrarAlerta: function(titu, msg) {
+        mostrarAlerta: function (titu, msg) {
             this.alerta.titulo = titu;
             this.alerta.mensaje = msg;
 
             $("#miAlerta").show('fade');
-            setTimeout(function() {
+            setTimeout(function () {
                 $("#miAlerta").hide('fade');
             }, 5000);
 
         },
-        cerrarAlerta: function() {
+        cerrarAlerta: function () {
             $('#miAlerta').hide('fade');
         },
-        buscar: function(x) {
+        buscar: function (x) {
 
             if (this.textoBusqueda == "")
                 return true;
@@ -56,115 +56,102 @@ var vueProduct = new Vue({
 
 
         },
-        nombreCategoria: function(idCat) {
-            return this.categorias.find(function(cat) {
+        nombreCategoria: function (idCat) {
+            return this.categorias.find(function (cat) {
                 return cat.idCategoria == idCat
             }).nombreCategoria;
         },
-        orderBy: function(campo) {
+        orderBy: function (campo) {
             if (this.orderByCampo == campo)
                 this.orderByAsc *= -1;
             this.orderByCampo = campo;
 
-            if (campo == "ID") {
-                this.productos.sort(function(a, b) {
+            if (campo === "ID") {
+                this.productos.sort(function (a, b) {
                     // Se debe usar vueProduct.orderByAsc
                     // porque this ya no hace referencia al objeto vue
-
-
-                    return vueProduct.orderByAsc *
-                        (a.idProducto - b.idProducto);
+                    return vueProduct.orderByAsc * (a.idProducto - b.idProducto);
                 });
 
             }
-            if (campo = 'NOMBRE') {
-                this.productos.sort(function(a, b) {
-                    if (a.nombreProducto > b.nombreProducto)
-                        return vueProduct.orderByAsc * 1;
-                    else
-                        return vueProduct.orderByAsc * -1;
-                });
-
+            if (campo === 'NOMBRE') {
+                vueProduct.orderByAsc === 1 ? vueProduct.productos.sort((a, b) => (a.nombreProducto > b.nombreProducto) ? 1 : -1) : vueProduct.productos.sort((a, b) => (a.nombreProducto < b.nombreProducto) ? 1 : -1);
             }
-            if (campo == "PRECIO") {
-                this.productos.sort(function(a, b) {
-                    // Se debe usar vueProduct.orderByAsc
-                    // porque this ya no hace referencia al objeto vue
-                    return vueProduct.orderByAsc * (a.precio - b.precio);
-                });
-
+            if (campo === "PRECIO") {
+                vueProduct.orderByAsc === 1 ? vueProduct.productos.sort((a, b) => ((a.precio) > (b.precio)) ? 1 : -1) : vueProduct.productos.sort((a, b) => ((a.precio) < (b.precio)) ? 1 : -1);
             }
         },
-        cargarDatos: function() {
+        cargarDatos: function () {
             //cargando las categorias
-            axios.get(baseUri+'/categoria', {
-                headers
+            axios.get(baseUri + '/categoria', {
+                    headers
                 })
-                .then(function(res) {
+                .then(function (res) {
                     vueProduct.categorias = res.data;
+                    //PRODUCTOS
+                    axios.get(baseUri + '/producto', {
+                            headers
+                        })
+                        .then(function (res) {
+                            vueProduct.productos = res.data;
+                        })
+                        .catch(function (error) {
+                            // handle error
+                            console.log(error);
+                        });
                 })
-                .catch(function(error) {
-                    // handle error
-                    console.log(error);
-                });
-            //PRODUCTOS
-            axios.get(baseUri+'/producto',{
-                headers
-                })
-                .then(function(res) {
-                    vueProduct.productos = res.data;
-                })
-                .catch(function(error) {
+                .catch(function (error) {
                     // handle error
                     console.log(error);
                 });
 
+
         },
-        agregarProducto: function() {
-            axios.post(baseUri+'/producto', {
-                headers
+        agregarProducto: function () {
+            axios.post(baseUri + '/producto', {
+                    headers
                 }, this.nuevoProducto)
-                .then(function(res) {
+                .then(function (res) {
                     vueProduct.nuevoProducto.nombreProducto = "";
                     vueProduct.nuevoProducto.precio = 0;
                     vueProduct.cargarDatos();
                     vueProduct.mostrarAlerta("Producto Agregado", "Se agregó el nuevo producto");
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     // handle error
                     vueProduct.mostrarAlerta("Error", error);
 
                     console.log(error);
                 });
         },
-        modificarProducto: function() {
-            axios.put(baseUri+'/producto', {
-                headers
+        modificarProducto: function () {
+            axios.put(baseUri + '/producto', {
+                    headers
                 }, this.productos[this.productoSelected])
-                .then(function(res) {
+                .then(function (res) {
                     console.log("UPDATED PRODUCTO");
                     vueProduct.mostrarAlerta("Producto Modificado", "Se modifico el producto satisfactoriamente");
 
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     // handle error
                     vueProduct.mostrarAlerta("Error", error);
 
                     console.log(error);
                 });
         },
-        eliminarProducto: function() {
+        eliminarProducto: function () {
             console.log();
-            axios.delete(baseUri+'/producto/' + this.productos[this.productoSelected].idProducto,                         {
-                headers
+            axios.delete(baseUri + '/producto/' + this.productos[this.productoSelected].idProducto, {
+                    headers
                 })
-                .then(function(res) {
+                .then(function (res) {
                     console.log("DELETE PRODUCTO");
                     vueProduct.cargarDatos();
                     vueProduct.mostrarAlerta("Producto Eliminado", "El producto se eliminó de la base de datos");
 
                 })
-                .catch(function(error) {
+                .catch(function (error) {
                     // handle error
                     vueProduct.mostrarAlerta("Error:", error);
 
@@ -174,7 +161,7 @@ var vueProduct = new Vue({
 
     },
 
-    mounted: function() {
+    mounted: function () {
         this.cargarDatos();
     },
 
