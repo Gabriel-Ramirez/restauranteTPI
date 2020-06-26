@@ -95,13 +95,7 @@ const vueApp = new Vue({
         //consume la API con axios
         cargarDatos: function () {
             //Carga categorias
-            axios.get(baseUri + '/categoria', {
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8',
-                        'jwt': this.token,
-                        "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
-                    }
-                })
+            axios.get(baseUri + '/categoria', {headers})
                 .then(function (response) {
                     vueApp.categorias = response.data;
                     console.log("se cargaron los datos");
