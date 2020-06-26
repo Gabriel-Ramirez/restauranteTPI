@@ -95,7 +95,7 @@
         <div>
           <ul class="nav nav-tabs nav-fill shadow">
             <li class="nav-item" v-on:click.prevent="categoriaSelected=Cate.idCategoria;" v-for="Cate in categorias"
-              style="background-color: #fff;">
+              style="background-color: #fff;" v-if="categorias.length>0">
               <a class="nav-link active" role="tab" data-toggle="tab" href="#tab-1"
                 v-on:click.prevent="categoriaSelected=Cate.idCategoria;" style="color: #18bc9c;background-color: #fff;"
                 v-bind:class="{ 'navActivado': categoriaSelected==Cate.idCategoria }">{{ Cate.nombreCategoria }}<br /></a>
@@ -132,7 +132,7 @@
                       v-show="elProd.idCategoria.idCategoria==categoriaSelected &amp;&amp; buscar(index)"
                       v-on:click="productoSelected=index;"
                       v-bind:class="{ 'font-weight-bold' : productoSelected==index, 'backgroudColor':  productoSelected==index }"
-                      style="cursor: pointer;user-select: none;">
+                      style="cursor: pointer;user-select: none;" v-if="productos.length>0">
                       <td class="text-center">
                         <br />{{ elProd.idProducto }}<br />
                       </td>
@@ -166,6 +166,7 @@
           class="fa fa-chevron-up"></i></a>
     </div>
 
+    <!-- ------------------------------------------------Comienza el Modal Nuevo--------------------------- -->
     <div class="modal fade" role="dialog" tabindex="-1" id="modalNuevoProducto" style="min-height: 500px;">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -182,9 +183,9 @@
                 <span class="input-group-text"><i class="fa fa-folder-o" style="font-size: 24px;"></i></span>
               </div>
               <select class="form-control form-control-lg d-sm-flex justify-content-sm-start"
-                v-model="nuevoProducto.idCategoria.idCategoria">
+                v-model="nuevoProducto.idCategoria">
                 <optgroup label="Seleccione una Categoría">
-                  <option v-for="option in categorias" v-bind:value="option.idCategoria">
+                  <option v-for="option in categorias" v-bind:value="option.idCategoria" v-if="categorias.length>0">
                     {{ option.nombreCategoria }}
                   </option>
                 </optgroup>
@@ -227,6 +228,9 @@
         </div>
       </div>
     </div>
+    <!-- ------------------------------------------------Finaliza el Modal Nuevo--------------------------- -->
+
+    <!-- ------------------------------------------------Comienza el Modal Editar--------------------------- -->
     <div class="modal fade" role="dialog" tabindex="-1" id="modalEditarProducto" style="min-height: 500px;">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -245,9 +249,9 @@
                 <span class="input-group-text"><i class="fa fa-folder-o" style="font-size: 24px;"></i></span>
               </div>
               <select class="form-control form-control-lg d-sm-flex justify-content-sm-start"
-                v-model="productos[productoSelected].idCategoria">
+                v-model="productos[productoSelected].idCategoria.idCategoria" v-if="productos.length>0">
                 <optgroup label="Seleccione una categoria">
-                  <option v-for="option in categorias" v-bind:value="option.idCategoria">
+                  <option v-for="option in categorias" v-bind:value="option.idCategoria" v-if="categorias.length>0">
                     {{option.nombreCategoria}}
                   </option>
               </select>
@@ -289,6 +293,9 @@
         </div>
       </div>
     </div>
+    <!-- ------------------------------------------------Fin  del Modal Editar--------------------------- -->
+
+
     <div class="modal fade" role="dialog" tabindex="-1" id="modalEliminarProducto">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
