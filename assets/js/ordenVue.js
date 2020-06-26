@@ -4,7 +4,6 @@ const vordenes = new Vue({
         ordenes: [],
         categorias: [],
         productos: [],
-        token: localStorage.getItem('token'),
         orderByCampo: "",
         orderByAsc: 1,
         textoBusqueda: "",
@@ -169,7 +168,7 @@ const vordenes = new Vue({
                         var NuevaCantidad = yaEnorden.cantidad + porAgregar.cantidad;
                         porAgregar.cantidad = NuevaCantidad;
                         console.log("ya hay un producto igual en la orden")
-                        axios.put(baseUri+'/DetalleOrdens', porAgregar)
+                        axios.put(baseUri+'/orden', porAgregar)
                             .then(function(response) {
                                 vordenes.cargarDatos();
                                 vordenes.actualizarTotalOrden();
@@ -183,7 +182,7 @@ const vordenes = new Vue({
                     } else {
                         if (yaEnorden.idOrden === porAgregar.idOrden) {
                             console.log("no hay productos iguales en la orden")
-                            axios.post(baseUri+'/DetalleOrdens', porAgregar)
+                            axios.post(baseUri+'/orden', porAgregar)
                                 .then(function(response) {
                                     vordenes.cargarDatos();
                                     vordenes.actualizarTotalOrden();
@@ -264,7 +263,13 @@ const vordenes = new Vue({
             this.obtenerElTotalNuevaOrden();
             this.nuevaOrden.total = this.totalNuevaOrden;
 
-            axios.post(baseUri+'orden', this.nuevaOrden)
+            console.log(headers);
+            console.log(this.nuevaOrden);
+            axios.post(baseUri+'/orden', {headers:{
+                'Content-Type':'application/json;charset=utf-8',
+                'jwt': localStorage.getItem('token'),
+                "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
+            }}, this.nuevaOrden, )
                 .then(function(response) {
                     console.log(response)
                     vordenes.ordenSelected = response.data;
@@ -274,7 +279,7 @@ const vordenes = new Vue({
                     })
                     console.log(vordenes.detallesDeNuevaOrden)
                     for (var iterator of vordenes.detallesDeNuevaOrden) {
-                        axios.post(baseUri+'/DetalleOrdens', iterator)
+                        axios.post(baseUri+'/orden', {headers:headers}, iterator )
                             .then(function(res) {
                                 vordenes.cargarDatos();
                                 vordenes.mostrarAlertaCambio('Exito', 'Se agrego la orden');
@@ -370,13 +375,7 @@ const vordenes = new Vue({
             // }
 
             console.log(this.token);
-            axios.get(baseUri+'/orden', {
-                headers:{
-                    'Content-Type':'application/json;charset=utf-8',
-                    'jwt': this.token,
-                    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
-                }
-                })
+            axios.get(baseUri+'/orden', {headers})
                 .then(function(res) {
                     vordenes.ordenes = res.data;
                 })
@@ -390,7 +389,7 @@ const vordenes = new Vue({
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Headers': 'Content-Type, jtw, Access-Control-Allow-Origin, Access-Control-Allow-Methods'
+                    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
                 }
                 })
                 .then(function(res) {
@@ -406,7 +405,7 @@ const vordenes = new Vue({
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Headers': 'Content-Type, jtw, Access-Control-Allow-Origin, Access-Control-Allow-Methods'
+                    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
                 }
                 })
                 .then(function(res) {
@@ -422,7 +421,7 @@ const vordenes = new Vue({
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Headers': 'Content-Type, jtw, Access-Control-Allow-Origin, Access-Control-Allow-Methods'
+                    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
                 }
                 })
                 .then(function(res) {
@@ -437,7 +436,7 @@ const vordenes = new Vue({
                 headers:{
                     'Content-Type':'application/json;charset=utf-8',
                     'jwt': this.token,
-                    'Access-Control-Allow-Headers': 'Content-Type, jtw, Access-Control-Allow-Origin, Access-Control-Allow-Methods'
+                    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
                 }
                 })
                 .then(function(res) {
@@ -463,7 +462,7 @@ const vordenes = new Vue({
                     headers:{
                         'Content-Type':'application/json;charset=utf-8',
                         'jwt': this.token,
-                        'Access-Control-Allow-Headers': 'X-Custom-Header, jwt'
+                        "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
                     }
                     })
                     .then(function(res) {
@@ -471,7 +470,7 @@ const vordenes = new Vue({
                             headers:{
                                 'Content-Type':'application/json;charset=utf-8',
                                 'jwt': this.token,
-                                'Access-Control-Allow-Headers': 'X-Custom-Header, jwt'
+                                "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
                             }
                             })
                             .then(function(res) {
@@ -496,7 +495,7 @@ const vordenes = new Vue({
 
         obtenerDetalleOrden: function() {
             this.detalleOrdenSelected = this.detalleOrden.filter(item => {
-                return item.idOrden === this.ordenSelected.idOrden
+                return item.detalleOrdenPK.idOrden === this.ordenSelected.idOrden
             });
 
             this.productoSelected = this.detalleOrden.find(prod => {
@@ -552,7 +551,7 @@ const vordenes = new Vue({
                             headers:{
                                 'Content-Type':'application/json;charset=utf-8',
                                 'jwt': this.token,
-                                'Access-Control-Allow-Headers': 'X-Custom-Header'
+                                "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
                             }
                             })
                         .then(response => {

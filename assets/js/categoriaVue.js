@@ -120,7 +120,7 @@ const vueApp = new Vue({
             //         console.log(error);
             //     });
         },
-
+        
         mostrarAlerta: function (titu, msg) {
             this.alerta.titulo = titu;
             this.alerta.mensaje = msg;
@@ -138,6 +138,7 @@ const vueApp = new Vue({
     },
 
     computed: {
+   
         categoriaActiva() {
             this.categoriaEdit = this.categorias.find(it => {
                 console.log(this.categoriaSeleccionada.idCategoria);

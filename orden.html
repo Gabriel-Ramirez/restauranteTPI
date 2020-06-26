@@ -160,6 +160,7 @@
             <i class="fa fa-close close" v-on:click="cerrarAlerta();"></i>
         </div>
 
+
         <!---------------------------------------- Modal Agregar productos ---------------------------------------------------------->
         <div class="modal fade modal-dialog-centered modal-dialog-scrollable show" role="dialog" tabindex="-1"
             id="agregarProductosModal">
@@ -208,7 +209,7 @@
                                     </thead>
                                     <tbody>
                                         <tr v-for="(producto, index) in productos"
-                                            v-show="producto.idCategoria==categoriaSelected &amp;&amp; buscarCategoria(index)"
+                                        v-show="producto.idCategoria.idCategoria==categoriaSelected &amp;&amp; buscarCategoria(index)"
                                             v-on:click="productoSelected=index;"
                                             v-bind:class="{ 'font-weight-bold' : productoSelected==index }">
                                             <td class="text-center">{{producto.idProducto}}</td>
@@ -361,7 +362,7 @@
                                         </thead>
                                         <tbody>
                                             <tr v-for="(producto, index) in productos"
-                                                v-show="producto.idCategoria==categoriaSelected &amp;&amp; buscarCategoria(index)"
+                                                v-show="producto.idCategoria.idCategoria==categoriaSelected &amp;&amp; buscarCategoria(index)"
                                                 v-on:click="productoSelected=index;"
                                                 v-bind:class="{ 'font-weight-bold' : productoSelected==index }">
                                                 <td class="text-center">{{producto.idProducto}}</td>
@@ -471,7 +472,7 @@
                                     <tr>
                                         <td style="font-weight: bold;">MESERO:</td>
                                         <td><input class="ml-2 form-control-sm" disabled type="text" id="mesero"
-                                                v-model="this.ordenSelected.mesero"></td>
+                                                v-model="this.ordenSelected"></td>
                                     </tr>
                                     <tr>
                                         <td style="font-weight: bold;">MESA:</td>
