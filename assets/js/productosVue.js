@@ -24,6 +24,7 @@ var vueProduct = new Vue({
             "esPreparado": 0
         },
     },
+
     methods: {
         mostrarAlerta: function (titu, msg) {
             this.alerta.titulo = titu;
@@ -81,8 +82,10 @@ var vueProduct = new Vue({
                 vueProduct.orderByAsc === 1 ? vueProduct.productos.sort((a, b) => ((a.precio) > (b.precio)) ? 1 : -1) : vueProduct.productos.sort((a, b) => ((a.precio) < (b.precio)) ? 1 : -1);
             }
         },
-        cargarDatos: function () {
-            //cargando las categorias
+       cargarDatos: function () {
+
+            console.log(headers);
+            // cargando las categorias
             axios.get(baseUri + '/categoria', {
                     headers
                 })
@@ -108,8 +111,13 @@ var vueProduct = new Vue({
 
         },
         agregarProducto: function () {
-            axios.post(baseUri + '/producto', {
-                    headers
+            console.log(headers);
+            console.log(this.nuevoProducto);
+
+            axios.post(baseUri + '/producto/', {
+                    "headers": {
+                        "jwt":localStorage.getItem('token')
+                    }
                 }, this.nuevoProducto)
                 .then(function (res) {
                     vueProduct.nuevoProducto.nombreProducto = "";

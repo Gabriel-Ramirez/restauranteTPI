@@ -27,11 +27,7 @@ var vueProduct = new Vue({
         },
     },
     methods: {
-         headers:{
-            'Content-Type':'application/json;charset=utf-8',
-            'jwt': this.token,
-            'Access-Control-Allow-Origin': '*',
-        },
+
         mostrarAlerta: function(titu, msg) {
             this.alerta.titulo = titu;
             this.alerta.mensaje = msg;

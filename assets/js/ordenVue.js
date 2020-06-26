@@ -17,6 +17,12 @@ const vordenes = new Vue({
         totalNuevaOrden: 0,
         productoSelectedAgregar: "",
         ordenesEstado: true,
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'jwt': localStorage.getItem("token"),
+            "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje",
+            
+        },
         nuevoDetalleOrden: {
             "cantidad": 0,
             "idOrden": 0,
@@ -263,13 +269,8 @@ const vordenes = new Vue({
             this.obtenerElTotalNuevaOrden();
             this.nuevaOrden.total = this.totalNuevaOrden;
 
-            console.log(headers);
             console.log(this.nuevaOrden);
-            axios.post(baseUri+'/orden', {headers:{
-                'Content-Type':'application/json;charset=utf-8',
-                'jwt': localStorage.getItem('token'),
-                "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
-            }}, this.nuevaOrden, )
+            axios.post(baseUri+'/orden', this.nuevaOrden, {headers: this.headers})
                 .then(function(response) {
                     console.log(response)
                     vordenes.ordenSelected = response.data;
@@ -279,7 +280,7 @@ const vordenes = new Vue({
                     })
                     console.log(vordenes.detallesDeNuevaOrden)
                     for (var iterator of vordenes.detallesDeNuevaOrden) {
-                        axios.post(baseUri+'/orden', {headers:headers}, iterator )
+                        axios.post(baseUri+'/orden', iterator, {headers:this.headers} )
                             .then(function(res) {
                                 vordenes.cargarDatos();
                                 vordenes.mostrarAlertaCambio('Exito', 'Se agrego la orden');
@@ -369,11 +370,6 @@ const vordenes = new Vue({
         },
 
         cargarDatos: function() {
-            //cargando las ordenes
-            // async function leertoken(){
-            //     return await m;
-            // }
-
             console.log(this.token);
             axios.get(baseUri+'/orden', {headers})
                 .then(function(res) {
