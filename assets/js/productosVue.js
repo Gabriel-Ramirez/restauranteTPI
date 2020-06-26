@@ -9,6 +9,11 @@ var vueProduct = new Vue({
             titulo: "Error",
             mensaje: "Texto"
         },
+        headers: {
+            'Content-Type': 'application/json;charset=utf-8',
+            'jwt': localStorage.getItem("token"),
+            "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
+        },
         orderByCampo: "",
         orderByAsc: 1,
         textoBusqueda: "",
@@ -115,17 +120,16 @@ var vueProduct = new Vue({
 
         },
         agregarProducto: function () {
-            console.log(headers);
-            console.log(this.nuevoProducto);
-
-            axios.post(baseUri + '/producto/', {
-                    "headers": {
-                        "jwt":localStorage.getItem('token')
-                    }
-                }, this.nuevoProducto)
+            console.log('......'+this.headers.jwt);
+            axios.post(baseUri + '/producto', this.nuevoProducto, {headers: this.headers} )
                 .then(function (res) {
-                    vueProduct.nuevoProducto.nombreProducto = "";
-                    vueProduct.nuevoProducto.precio = 0;
+                    vueProduct.nuevoProducto= {
+                        "idProducto": 0,
+                        "idCategoria": 1,
+                        "nombreProducto": "",
+                        "precio": 0,
+                        "esPreparado": 0
+                    }
                     vueProduct.cargarDatos();
                     vueProduct.mostrarAlerta("Producto Agregado", "Se agregó el nuevo producto");
                 })
