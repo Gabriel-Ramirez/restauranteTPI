@@ -17,6 +17,7 @@ const vueApp = new Vue({
             "nombreCategoria": ""
         },
 
+
     },
 
     mounted: function () {
@@ -105,7 +106,7 @@ const vueApp = new Vue({
         cargarDatos: function () {
             //Carga categorias
             axios.get(baseUri + '/categoria', {
-                    headers: this.headers
+                    headers
                 })
                 .then(function (response) {
                     vueApp.categorias = response.data;
