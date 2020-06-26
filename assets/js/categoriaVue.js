@@ -26,9 +26,9 @@ const vueApp = new Vue({
 
     methods: {
         agregarCategoria() {
-            console.log("..........."+this.headers.jwt);
+            console.log("..........."+headers.JWT);
             axios.post(baseUri + '/categoria', this.nuevaCategoria,{
-                headers: this.headers
+                headers
             })
         
                 .then(function (response) {
@@ -76,7 +76,7 @@ const vueApp = new Vue({
         eliminarCategoria: function () {
 
             axios.delete(baseUri + '/categoria/' + this.categoriaSeleccionada.idCategoria,{
-                headers: this.headers
+                headers
             })
                 .then(function (res) {
                     console.log("DELETE PRODUCTO");
@@ -117,14 +117,6 @@ const vueApp = new Vue({
 
                 });
 
-            // //Carga productos
-            // axios.get(baseUri+'/producto')
-            //     .then(function(response) {
-            //         vueApp.productos = response.data;
-            //     })
-            //     .catch(function(error) {
-            //         console.log(error);
-            //     });
         },
 
         mostrarAlerta: function (titu, msg) {

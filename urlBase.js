@@ -5,7 +5,7 @@ const baseUriFront = 'http://localhost:5500';
 
 const headers = {
     'Content-Type':'application/json;charset=utf-8',
-    'jwt': localStorage.getItem('token'),
+    'JWT': localStorage.getItem('token'),
     "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
 }
 
