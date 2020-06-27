@@ -273,8 +273,15 @@ a.current_dot {
     }
 
     .slider {
-        width: 100%;
-        height: 70%;
+        display: none;
+    }
+
+    .divContainerCreadores {
+        display: block!important;
+    }
+
+    .testimonial{
+        width: 100%!important;
     }
 }
 
@@ -331,6 +338,12 @@ a.current_dot {
     margin: 15px 0 0 0 !important;
     margin: 0;
     letter-spacing: 1px;
+}
+
+.divContainerCreadores {
+    display: flex;
+    margin-bottom: 1rem;
+    justify-content: space-around;
 }
 
 /* ---------------------------------------- Fin de creadores pag index.html------------------------------------- */
