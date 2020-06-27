@@ -57,6 +57,7 @@
                 </div>
             </div>
         </nav>
+
        <div class="mb-5">
         <form>
             <div class="shadow-sm justify-content-end justify-content-lg-end input-group"
@@ -89,6 +90,10 @@
                     <div id="checkbox" class="slideThree" style="display: inline-table;"><input v-model="ordenesEstado"
                             type="checkbox" id="slideThree" value="None"><label for="slideThree"></label></div>
                 </div>
+            </div>
+            <div class="alert alert-success collapse" role="alert" id="alertaCambio">
+                <span><strong>{{ alerta.titulo }} :</strong>&nbsp;{{ alerta.mensaje }}.</span>
+                <i class="fa fa-close close" v-on:click="cerrarAlerta();"></i>
             </div>
             <div>
                 <div class="table-responsive" id="table" style="min-height: fit-content;">
@@ -157,10 +162,7 @@
             </div>
         </form>
        </div>
-        <div class="alert alert-success collapse" role="alert" id="alertaCambio">
-            <span><strong>{{ alerta.titulo }} :</strong>&nbsp;{{ alerta.mensaje }}.</span>
-            <i class="fa fa-close close" v-on:click="cerrarAlerta();"></i>
-        </div>
+
 
 
         <!---------------------------------------- Modal Agregar productos ---------------------------------------------------------->
@@ -555,7 +557,7 @@
                                     </tr>
                                     <tr>
                                         <td class="d-flex justify-content-end" style="font-weight: bold;">MESERO:</td>
-                                        <td>{{this.ordenSelected.mesero}}</td>
+                                        <td>{{this.ordenSelected.idUsuario.nombre}}</td>
                                     </tr>
                                     <tr>
                                         <td class="d-flex justify-content-end" style="font-weight: bold;">MESA:</td>

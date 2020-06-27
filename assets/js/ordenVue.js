@@ -466,21 +466,10 @@ const vordenes = new Vue({
         eliminarOrden: function() {
             if (this.ordenSelected.estado != ("C" || "c")) {
                 console.log("Eliminar orden")
-                axios.delete(baseUri+'detalleorden/' + this.ordenSelected.idOrden, {
-                    headers:{
-                        'Content-Type':'application/json;charset=utf-8',
-                        'jwt': this.token,
-                        "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
-                    }
-                    })
+                console.log(this.headers);
+                axios.delete(baseUri+'/detalleorden/'+this.ordenSelected.idOrden, {headers: vordenes.headers})
                     .then(function(res) {
-                        axios.delete(baseUri+'orden/' + vordenes.ordenSelected.idOrden, {
-                            headers:{
-                                'Content-Type':'application/json;charset=utf-8',
-                                'jwt': this.token,
-                                "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
-                            }
-                            })
+                        axios.delete(baseUri+'/orden/'+vordenes.ordenSelected.idOrden, {headers: this.headers})
                             .then(function(res) {
                                 console.log("DELETE Orden");
                                 vordenes.mostrarAlertaCambio("Exito:", "La orden se eliminó de la base de datos");
@@ -546,26 +535,23 @@ const vordenes = new Vue({
                 console.log("verificacion de efectivo");
                 if (this.efectivo > this.ordenSelected.total) {
                     this.cambio = this.efectivo - this.ordenSelected.total;
-                    axios.put(baseUri+'orden/' + this.ordenSelected.idOrden, {
-                            "fecha": this.ordenSelected.fecha,
-                            "mesero": this.ordenSelected.mesero,
-                            "mesa": this.ordenSelected.mesa,
-                            "cliente": this.ordenSelected.cliente,
-                            "estado": "C",
-                            "total": this.ordenSelected.total,
-                            "observacion": this.ordenSelected.observacion
-                        },
-                        {
-                            headers:{
-                                'Content-Type':'application/json;charset=utf-8',
-                                'jwt': this.token,
-                                "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
-                            }
-                            })
+                    let cobrar =  {
+                        "cliente": this.ordenSelected.cliente,
+                        "estado": "C",
+                        "fecha": this.ordenSelected.fecha,
+                        "idUsuario": parseInt(localStorage.getItem('idUsuario')),
+                        "idOrden": parseInt(this.ordenSelected.idOrden),
+                        "mesa": this.ordenSelected.mesa,
+                        "observacion": this.ordenSelected.observacion,
+                        "total": parseFloat(this.ordenSelected.total)
+                    }
+                    console.log(cobrar)
+                    axios.put(baseUri+'/orden', cobrar, {headers: this.headers}
+                        )
                         .then(response => {
-                            
-                            this.mostrarAlertaCambio("Exito: ", "Cambio:$" + (this.cambio).toFixed(2) + "   Total:$" + this.ordenSelected.total + "   Efectivo:$" + this.efectivo);
-                            this.cargarDatos();
+                            console.log(response);
+                            vordenes.mostrarAlertaCambio("Exito: ", "Cambio:$" + (this.cambio).toFixed(2) + "   Total:$" + this.ordenSelected.total + "   Efectivo:$" + this.efectivo);
+                            vordenes.cargarDatos();
                         })
                         .catch(error => {
                             this.mostrarAlertaCambio("Error", error)
