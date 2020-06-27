@@ -263,6 +263,7 @@ const vordenes = new Vue({
 
             this.nuevaOrden.idUsuario = parseInt(localStorage.getItem('idUsuario'));
             this.totalNuevaOrden = 0;
+            this.nuevaOrden.fecha = new Date();
             this.obtenerElTotalNuevaOrden();
             this.nuevaOrden.total = parseFloat(this.totalNuevaOrden);
 
@@ -270,7 +271,7 @@ const vordenes = new Vue({
             console.log(this.nuevaOrden)
             axios.post(baseUri+'/orden', this.nuevaOrden, {headers: this.headers})
             .then(function(response) {
-                    console.log(response)
+                    console.log(response.data)
                     vordenes.ordenSelected = response.data;
                     vordenes.detallesDeNuevaOrden.map(item => {
                         item.idOrden = response.data.idOrden;
@@ -278,8 +279,9 @@ const vordenes = new Vue({
                     })
                     console.log(vordenes.detallesDeNuevaOrden)
                     for (var iterator of vordenes.detallesDeNuevaOrden) {
-                        axios.post(baseUri+'/detalleorden', {headers: this.headers}, iterator, )
+                        axios.post(baseUri+'/detalleorden', iterator, {headers}, )
                             .then(function(res) {
+                                console.log('recargando los datos')
                                 vordenes.cargarDatos();
                                 vordenes.mostrarAlertaCambio('Exito', 'Se agrego la orden');
                             })
