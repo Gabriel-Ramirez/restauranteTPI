@@ -474,7 +474,7 @@
                                     <tr>
                                         <td style="font-weight: bold;">MESERO:</td>
                                         <td><input class="ml-2 form-control-sm" disabled type="text" id="mesero"
-                                                v-model="this.ordenSelected"></td>
+                                                v-model="this.ordenSelected.idUsuario.nombre"></td>
                                     </tr>
                                     <tr>
                                         <td style="font-weight: bold;">MESA:</td>
@@ -508,7 +508,7 @@
                                 <tbody>
                                     <tr v-for="dos in detalleOrdenSelected" @click="productoSelected=dos.idProducto">
                                         <td class="text-center">{{dos.cantidad}}</td>
-                                        <td class="text-center">{{nombreProducto(dos.idProducto)}}</td>
+                                        <td class="text-center">{{nombreProducto(dos.detalleOrdenPK.idProducto)}}</td>
                                         <td class="text-center">${{dos.precioUnitario}}</td>
                                         <td class="text-center">${{(dos.precioUnitario*dos.cantidad).toFixed(2)}}</td>
                                     </tr>

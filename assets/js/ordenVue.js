@@ -45,7 +45,19 @@ const vordenes = new Vue({
             "observacion": " ",
             "total": 0
         },
-        ordenSelected: 1,
+        ordenSelected: {
+            "cliente": " ",
+            "estado": "A",
+            "fecha": " ",
+            "idOrden": 0,
+            "idUsuario":{
+                "idUsuario":'',
+                "nombre":''
+            },
+            "mesa": " ",
+            "observacion": " ",
+            "total": 0
+        },
         ordenSeleccionada: 1,
         nuevoProducto: '',
         nuevoProductoidCategoria: '',
