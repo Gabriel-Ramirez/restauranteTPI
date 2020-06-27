@@ -146,15 +146,21 @@
                             <tr v-for="(orden,index) in ordenes" @dblClick="obtenerDetalleOrden();"
                                 v-on:click="ordenSelected=orden" v-show="buscar(index)"
                                 v-if="ordenesEstado === true || orden.estado === 'A'"
-                                v-bind:class="{ 'font-weight-bold' : ordenSelected.idOrden==orden.idOrden, 'backgroudColor':  ordenSelected.idOrden==orden.idOrden}">
-                                <td class="d-none d-md-table-cell text-center">{{orden.idOrden}}</td>
-                                <td class="d-none d-xl-table-cell text-center">{{orden.fecha}}</td>
+                                v-bind:class="{ 'font-weight-bold' : ordenSelected.idOrden==orden.idOrden, 'backgroudColor':  ordenSelected.idOrden==orden.idOrden}" style="cursor: pointer;
+                                user-select: none;">
+                                <td class="d-none d-md-table-cell text-center" style="cursor: pointer;
+                                user-select: none;">{{orden.idOrden}}</td>
+                                <td class="d-none d-xl-table-cell text-center" style="cursor: pointer;
+                                user-select: none;">{{orden.fecha}}</td>
                                 <td class="text-center">{{orden.cliente}}</td>
                                 <td class="text-center">{{orden.mesa}}</td>
-                                <td class="d-none d-sm-table-cell text-center">{{orden.idUsuario.nombre}}</td>
+                                <td class="d-none d-sm-table-cell text-center" style="cursor: pointer;
+                                user-select: none;">{{orden.idUsuario.nombre}}</td>
                                 <td class="text-center">${{orden.total}}</td>
-                                <td class="d-none d-sm-table-cell text-center">{{orden.estado}}</td>
-                                <td class="d-none d-md-table-cell text-center">{{orden.observacion}}</td>
+                                <td class="d-none d-sm-table-cell text-center" style="cursor: pointer;
+                                user-select: none;">{{orden.estado}}</td>
+                                <td class="d-none d-md-table-cell text-center" style="cursor: pointer;
+                                user-select: none;">{{orden.observacion}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -508,11 +514,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="dos in detalleOrdenSelected" @click="productoSelected=dos.idProducto">
-                                        <td class="text-center">{{dos.cantidad}}</td>
-                                        <td class="text-center">{{nombreProducto(dos.detalleOrdenPK.idProducto)}}</td>
-                                        <td class="text-center">${{dos.precioUnitario}}</td>
-                                        <td class="text-center">${{(dos.precioUnitario*dos.cantidad).toFixed(2)}}</td>
+                                    <tr v-for="dos in detalleOrdenSelected" @click="productoSelected=dos.idProducto" style="cursor: pointer;
+                                    user-select: none;">
+                                        <td class="text-center" style="cursor: pointer;
+                                        user-select: none;">{{dos.cantidad}}</td>
+                                        <td class="text-center" style="cursor: pointer;
+                                        user-select: none;">{{nombreProducto(dos.detalleOrdenPK.idProducto)}}</td>
+                                        <td class="text-center" style="cursor: pointer;
+                                        user-select: none;">${{dos.precioUnitario}}</td>
+                                        <td class="text-center" style="cursor: pointer;
+                                        user-select: none;">${{(dos.precioUnitario*dos.cantidad).toFixed(2)}}</td>
                                     </tr>
                                 </tbody>
                             </table>
