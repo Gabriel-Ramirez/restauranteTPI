@@ -60,50 +60,7 @@ var vueLogin = new Vue({
             })
 
         },
-        // verificar() {
-        //     $("body").removeClass("loaded");
 
-        //     if (
-        //         typeof vueLogin.registro.usuario != "undefined" &&
-        //         typeof vueLogin.registro.contrasenia != "undefined" &&
-        //         vueLogin.registro.usuario.trim() != "" &&
-        //         vueLogin.registro.contrasenia.trim() != ""
-        //     ) {
-        //         axios
-        //             .post(baseUri+"usuario/login",vueLogin.registro.usuario)
-        //             .then(function(response) {
-        //                 vueLogin.usuario = response.data;
-        //                 console.log(vueLogin.usuario);
-        //                 if (vueLogin.usuario != "") {
-        //                     if (
-        //                         vueLogin.usuario.contrasenia === vueLogin.registro.contrasenia
-        //                     ) {
-        //                         console.log("Encontrado");
-        //                         localStorage.setItem(
-        //                             "nombreUsuario",
-        //                             vueLogin.registro.usuario
-        //                         );
-        //                         window.location.assign(
-        //                             "http://127.0.0.1:5500/orden.html"
-        //                         );
-        //                     } else {
-        //                         alertaModal();
-        //                     }
-        //                 } else {
-        //                     console.log("no");
-        //                     alertaModal();
-        //                 }
-        //                 $("body").addClass("loaded");
-        //             })
-        //             .catch(function(error) {
-        //                 console.log(error);
-        //                 $("body").addClass("loaded");
-        //             });
-        //     } else {
-        //         $("body").addClass("loaded");
-        //         alertaModal();
-        //     }
-        // },
        
         agregarUsuario() {
             $("body").removeClass("loaded");
