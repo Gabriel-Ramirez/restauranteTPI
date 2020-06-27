@@ -81,10 +81,11 @@
                         v-on:click="btnAgregarProductos();">Agregar productos</button>
                     <button class="btn btn-warning border rounded shadow-sm" id="btnNewOrder" type="button"
                         data-toggle="modal" data-target="#modalCobrar" style="color: rgb(255,255,255);"
-                        v-if="ordenSelected.estado!='C' &amp;&amp; ordenSelected.estado!=null">Cobrar</button><button
+                        v-if="ordenSelected.estado!='C' &amp;&amp; ordenSelected.estado!=null">Cobrar</button>
+                    <button
                         class="btn btn-danger border rounded shadow-sm" id="btnEliminarOrden" type="button"
                         data-toggle="modal" data-target="#modalEliminarOrden"
-                        v-if="ordenSelected.estado!='C' &amp;&amp; ordenSelected.estado!=null">Eliminar</button></div>
+                        v-if="ordenSelected.estado!='C' &amp;&amp; ordenSelected.estado!=null" @click="ordenSelected.observacion =' '">Cerrar Orden</button></div>
                 <div style="width: 100%;"><small class="form-text text-muted"
                         style="font-size: 20px;"><br>{{ordenesEstado ? 'Mostrando todas las ordenes':'Mostrando ordenes sólo activas'}}<br></small>
                     <div id="checkbox" class="slideThree" style="display: inline-table;"><input v-model="ordenesEstado"
@@ -606,15 +607,17 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header d-flex align-items-center">
-                        <h4 class="modal-title">Eliminar categoría</h4><button type="button" class="close"
+                        <h4 class="modal-title">Cerrar Orden</h4><button type="button" class="close"
                             data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
                     </div>
                     <div class="modal-body">
-                        <p>¿Está seguro que quiere eliminar la orden: #{{ordenSelected.idOrden}} ?</p>
+                        <p>¿Cerrar orden: #{{ordenSelected.idOrden}} ?</p>
+                        <label>Motivo:</label>
+                        <textarea class="form-control" aria-label="With textarea">{{ordenSelected.observacion}}</textarea>
                     </div>
                     <div class="modal-footer"><button class="btn btn-light" type="button"
                             data-dismiss="modal">Cerrar</button><button class="btn btn-danger" type="button"
-                            @click="eliminarOrden();" data-dismiss="modal">Eliminar</button></div>
+                            @click="cerrarOrden();" data-dismiss="modal">Cerrar Orden</button></div>
                 </div>
             </div>
         </div>

@@ -87,14 +87,6 @@ const vordenes = new Vue({
                         (a.idOrden - b.idOrden);
                 });
             }
-            // if (campo = 'cliente') {
-            //   this.ordenes.sort(function (a, b) {
-            //     if (a.cliente > b.cliente)
-            //       return vordenes.orderByAsc * 1;
-            //     else
-            //       return vordenes.orderByAsc * -1;
-            //   });
-            // }
             if (campo == "mesa") {
                 this.ordenes.sort(function(a, b) {
                     return vordenes.orderByAsc *
@@ -163,7 +155,7 @@ const vordenes = new Vue({
             var totalAnterior = this.ordenSelected.total;
             this.ordenSelected.total = (this.precioTotal + totalAnterior).toFixed(2);
             console.log(this.ordenSelected.total);
-            axios.put(baseUri+'/Ordens', this.ordenSelected)
+            axios.put(baseUri+'/orden',{headers}, this.ordenSelected)
                 .then(function(response) {
                     console.log("Se actualizo el total");
                     vordenes.cargarDatos();
@@ -175,8 +167,8 @@ const vordenes = new Vue({
 
         },
         agregarAOrdenDB() {
-            console.log("agregar a orden DB");
-            // debugger;
+            console.log("agregar a orden DB...");
+            debugger;
             for (let index = 0; index < this.detalleOrdenes.length; index++) {
                 const yaEnorden = this.detalleOrdenes[index];
                 for (let i = 0; i < this.detallesDeNuevaOrden.length; i++) {
@@ -185,7 +177,7 @@ const vordenes = new Vue({
                         var NuevaCantidad = yaEnorden.cantidad + porAgregar.cantidad;
                         porAgregar.cantidad = NuevaCantidad;
                         console.log("ya hay un producto igual en la orden")
-                        axios.put(baseUri+'/orden', porAgregar)
+                        axios.put(baseUri+'/orden', {headers}, porAgregar)
                             .then(function(response) {
                                 vordenes.cargarDatos();
                                 vordenes.actualizarTotalOrden();
@@ -199,7 +191,7 @@ const vordenes = new Vue({
                     } else {
                         if (yaEnorden.idOrden === porAgregar.idOrden) {
                             console.log("no hay productos iguales en la orden")
-                            axios.post(baseUri+'/orden', porAgregar)
+                            axios.post(baseUri+'/orden', {headers}, porAgregar)
                                 .then(function(response) {
                                     vordenes.cargarDatos();
                                     vordenes.actualizarTotalOrden();
@@ -237,17 +229,18 @@ const vordenes = new Vue({
                     "idProducto": 0,
                     "precioUnitario": 0
                 },
-                this.nuevaOrden = {
+                this.nuevaOrden= {
                     "cliente": " ",
                     "estado": "A",
                     "fecha": " ",
+                    "idOrden": 0,
                     "mesa": " ",
                     "observacion": " ",
                     "total": 0
                 },
                 this.detallesDeNuevaOrden = []
-
         },
+
         obtenerElTotalNuevaOrden() {
             this.precioTotal = this.detallesDeNuevaOrden.reduce((total, item) => {
                 return total + (item.precioUnitario * item.cantidad);
@@ -293,6 +286,7 @@ const vordenes = new Vue({
                     for (var iterator of vordenes.detallesDeNuevaOrden) {
                         axios.post(baseUri+'/detalleorden', iterator, {headers}, )
                             .then(function(res) {
+                                vordenes.iniciarNuevaOrden();
                                 console.log('recargando los datos')
                                 vordenes.cargarDatos();
                                 vordenes.mostrarAlertaCambio('Exito', 'Se agrego la orden');
@@ -463,31 +457,17 @@ const vordenes = new Vue({
             }).nombreProducto;
         },
 
-        eliminarOrden: function() {
-            if (this.ordenSelected.estado != ("C" || "c")) {
-                console.log("Eliminar orden")
-                console.log(this.headers);
-                axios.delete(baseUri+'/detalleorden/'+this.ordenSelected.idOrden, {headers: vordenes.headers})
-                    .then(function(res) {
-                        axios.delete(baseUri+'/orden/'+vordenes.ordenSelected.idOrden, {headers: this.headers})
-                            .then(function(res) {
-                                console.log("DELETE Orden");
-                                vordenes.mostrarAlertaCambio("Exito:", "La orden se eliminó de la base de datos");
-                                vordenes.cargarDatos();
-                            })
-                            .catch(function(error) {
-                                // handle error
-                                vordenes.mostrarAlertaCambio("Error:", error.message);
-                                console.log(error);
-                            });
-                    })
-                    .catch(function(error) {
-                        console.log(error);
-                    })
-                ordenSelected = null;
-            } else {
-                vordenes.mostrarAlertaCambio("Error:", "La orden esta Cerrada o activa");
-            }
+        cerrarOrden: function() {
+            this.ordenSelected.estado = 'c';
+            this.ordenSelected.idUsuario = this.ordenSelected.idUsuario.idUsuario;
+            axios.put(baseUri+'/orden', this.ordenSelected, {headers} )
+            .then(function(response){
+                vordenes.mostrarAlertaCambio('Exito', 'La orden fue cerrada');
+            })
+            .catch(function(e){
+                vordenes.mostrarAlertaCambio('Error', 'No se pudo cerrar la orden');
+             })
+
         },
 
         obtenerDetalleOrden: function() {
