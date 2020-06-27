@@ -17,7 +17,7 @@ function cerrarSesion() {
 
 //chequear el token
 function checkJWT() {
-    if (location.pathname === "/login.html") {} else {
+    if (location.pathname.indexOf("login.html") >= 0) {} else {
         if (localStorage.getItem('token') === null) {
             //Verifica si estamos en github pages o en local
             if (location.origin === 'https://gabriel-ramirez.github.io') {
