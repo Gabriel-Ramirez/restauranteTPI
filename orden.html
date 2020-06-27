@@ -100,14 +100,14 @@
                     <table class="table table-hover tbl tr td" id="table">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center"><a href="#"
+                                <th scope="col" class="d-none d-md-table-cell text-center"><a href="#"
                                         v-on:click.prevent="orderBy('numeroDeOrden')">ID&nbsp;<i
                                             class="fa fa-long-arrow-up"
                                             v-show="orderByCampo=='numeroDeOrden' &amp;&amp; orderByAsc==1"></i><i
                                             class="fa fa-long-arrow-down"
                                             v-show="orderByCampo=='numeroDeOrden' &amp;&amp; orderByAsc==-1"></i></a>
                                 </th>
-                                <th scope="col" class="text-center"><a href="#"
+                                <th scope="col" class="d-none d-xl-table-cell  text-center"><a href="#"
                                         v-on:click.prevent="orderBy('fecha')">FECHA&nbsp;<i class="fa fa-long-arrow-up"
                                             v-show="orderByCampo=='fecha' &amp;&amp; orderByAsc==1"></i><i
                                             class="fa fa-long-arrow-down"
@@ -123,7 +123,7 @@
                                             v-show="orderByCampo=='mesa' &amp;&amp; orderByAsc==1"></i><i
                                             class="fa fa-long-arrow-down"
                                             v-show="orderByCampo=='mesa' &amp;&amp; orderByAsc==-1"></i></a></th>
-                                <th scope="col" class="text-center"><a href="#"
+                                <th scope="col" class="d-none d-sm-table-cell text-center"><a href="#"
                                         v-on:click.prevent="orderBy('mesero')">MESERO&nbsp;<i
                                             class="fa fa-long-arrow-up"
                                             v-show="orderByCampo=='mesero' &amp;&amp; orderByAsc==1"></i><i
@@ -135,10 +135,10 @@
                                             v-show="orderByCampo=='total' &amp;&amp; orderByAsc==1"></i><i
                                             class="fa fa-long-arrow-down"
                                             v-show="orderByCampo=='total' &amp;&amp; orderByAsc==-1"></i></a></th>
-                                <th scope="col" class="text-center">
+                                <th scope="col" class=" d-none d-sm-table-cell text-center">
                                     <label class="form-check-label" for="cbxEstado">ESTADO</label>
                                 </th>
-                                <th scope="col" class="text-center"> OBSERVACIONES </th>
+                                <th scope="col" class="d-none d-md-table-cell text-center text-center"> OBSERVACIONES </th>
 
                             </tr>
                         </thead>
@@ -147,14 +147,14 @@
                                 v-on:click="ordenSelected=orden" v-show="buscar(index)"
                                 v-if="ordenesEstado === true || orden.estado === 'A'"
                                 v-bind:class="{ 'font-weight-bold' : ordenSelected.idOrden==orden.idOrden, 'backgroudColor':  ordenSelected.idOrden==orden.idOrden}">
-                                <td class="text-center">{{orden.idOrden}}</td>
-                                <td class="text-center">{{orden.fecha}}</td>
+                                <td class="d-none d-md-table-cell text-center">{{orden.idOrden}}</td>
+                                <td class="d-none d-xl-table-cell text-center">{{orden.fecha}}</td>
                                 <td class="text-center">{{orden.cliente}}</td>
                                 <td class="text-center">{{orden.mesa}}</td>
-                                <td class="text-center">{{orden.idUsuario.nombre}}</td>
+                                <td class="d-none d-sm-table-cell text-center">{{orden.idUsuario.nombre}}</td>
                                 <td class="text-center">${{orden.total}}</td>
-                                <td class="text-center">{{orden.estado}}</td>
-                                <td class="text-center">{{orden.observacion}}</td>
+                                <td class="d-none d-sm-table-cell text-center">{{orden.estado}}</td>
+                                <td class="d-none d-md-table-cell text-center">{{orden.observacion}}</td>
                             </tr>
                         </tbody>
                     </table>
