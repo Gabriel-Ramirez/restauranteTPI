@@ -11158,7 +11158,9 @@ section h2 {
 
 #mainNav .navbar-nav {
     margin-top: 1rem;
-    letter-spacing: .0625rem
+    letter-spacing: .0625rem;
+    cursor: pointer;
+    user-select: none;
 }
 
 #mainNav .navbar-nav li.nav-item a.nav-link {
