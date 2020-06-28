@@ -75,11 +75,6 @@
                         class="btn btn-primary border rounded shadow-sm" id="btnAgregarOrder" type="button"
                         data-toggle="modal" data-target="#modalNuevaOrden" @click="iniciarNuevaOrden();">Nueva
                         orden</button>
-                    <!-- <button class="btn btn-info border rounded shadow-sm" id="btnNewOrder"
-                        type="button" data-toggle="modal" data-target="#agregarProductosModal"
-                        style="color: rgb(255,255,255);"
-                        v-show="ordenSelected.estado!='C' &amp;&amp; ordenSelected.estado!=null"
-                        v-on:click="btnAgregarProductos();">Agregar productos</button> -->
                     <button class="btn btn-warning border rounded shadow-sm" id="btnNewOrder" type="button"
                         data-toggle="modal" data-target="#modalCobrar" style="color: rgb(255,255,255);"
                         v-if="ordenSelected.estado!='C' &amp;&amp; ordenSelected.estado!=null">Cobrar</button>
@@ -99,7 +94,7 @@
                 <i class="fa fa-close close" v-on:click="cerrarAlerta();"></i>
             </div>
             <div>
-                <div class="table-responsive" id="table" style="min-height: fit-content;">
+                <div class="table-responsive table table-sm" id="table" style="min-height: fit-content;">
                     <table class="table table-hover tbl tr td" id="table">
                         <thead>
                             <tr>
