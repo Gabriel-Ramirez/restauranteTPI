@@ -56,7 +56,7 @@ a:hover {
     color: #a0b3b0;
     font-size: 20px;
     float: left;
-    width: 50%;
+    width: 100%;
     text-align: center;
     cursor: pointer;
     -webkit-transition: .5s ease;
