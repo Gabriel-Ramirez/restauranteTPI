@@ -374,7 +374,16 @@ const vordenes = new Vue({
             else
                 return false;
         },
-
+        mldCerrarOrden(){
+            if(this.ordenSelected.estado == 'A'){
+                $('#modalCerrarOrden').modal('show');
+            }
+        },
+        mldCobrarOrden(){
+            if(this.ordenSelected.estado == 'A'){
+                $('#modalCobrar').modal('show');
+            }
+        },
         cargarDatos: function() {
             // console.log(this.token);
             axios.get(baseUri+'/orden', {headers})

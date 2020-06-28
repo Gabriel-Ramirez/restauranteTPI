@@ -161,12 +161,12 @@
                                 <td class="text-center" style="cursor: pointer;
                                                                 user-select: none;">                    
                                 <button class="btn btn-warning btn btn-sm border rounded shadow-sm" :class="{'disabled' : orden.estado=='c' ||  orden.estado=='C'}" type="button"
-                        data-toggle="modal" data-target="#modalCobrar" style="color: rgb(255,255,255);"
+                                @click="ordenSelected=orden; mldCobrarOrden();" style="color: rgb(255,255,255);"
                         >Cobrar</button>
                     <button
                         class="btn btn-danger btn btn-sm border rounded shadow-sm" :class="{'disabled' : orden.estado=='c' ||  orden.estado=='C'}" type="button"
-                        data-toggle="modal" data-target="#modalEliminarOrden"
-                        @click="orden.observacion =' '">Cerrar</button>
+                       
+                        @click="ordenSelected=orden; mldCerrarOrden(); orden.observacion =' '">Cerrar</button>
                     </td>
                                 <td class="d-none d-md-table-cell text-center" style="cursor: pointer;
                                 user-select: none;">{{orden.observacion}}</td>
@@ -180,121 +180,6 @@
 
 
 
-        <!---------------------------------------- Modal Agregar productos ---------------------------------------------------------->
-        <div class="modal fade modal-dialog-centered modal-dialog-scrollable show" role="dialog" tabindex="-1"
-            id="agregarProductosModal">
-            <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
-                <div class="modal-content">
-                    <div class="modal-header d-flex align-items-center">
-                        <h4 class="modal-title">Agregar Productos</h4><button type="button" class="close"
-                            data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <div>
-                            <h2 class="text-center">Menú</h2>
-                            <div id="primDiv" class="input-group-prepend primDiv">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend"><span class="d-sm-flex input-group-text"><i
-                                                class="fa fa-search" style="font-size: 24px;"></i></span></div><input
-                                        class="form-control form-control-lg d-sm-flex justify-content-sm-start"
-                                        v-model="textoBusquedaCategoria" type="text" placeholder="Buscar"
-                                        style="height: auto;">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col">
-                                    <ul class="nav nav-tabs nav-fill shadow">
-                                        <li href="#" class="nav-item"
-                                            v-on:click.prevent="categoriaSelected=Cate.idCategoria;"
-                                            v-for="Cate in categorias" style="background-color: #fff;">
-                                            <a class="nav-link active" role="tab" data-toggle="tab" href="#"
-                                                v-on:click.prevent="categoriaSelected=Cate.idCategoria;"
-                                                style="color: #18bc9c;background-color: #fff;"
-                                                v-bind:class="{ 'navActivado': categoriaSelected==Cate.idCategoria }">{{ Cate.nombreCategoria }}<br /></a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div id="table" class="table-responsive" style="min-height: fit-content;">
-                                <table class="table table-bordered" style="min-width: max-content;">
-                                    <thead class="table table-hover tbl tr td">
-                                        <tr>
-                                            <th scope="col" class="text-center">ID Producto</th>
-                                            <th scope="col" class="text-center">Nombre</th>
-                                            <th scope="col" class="text-center">Precio unitario</th>
-                                            <th scope="col" class="text-center">Cantidad</th>
-                                            <th scope="col" class="text-center">Es Preparado</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="(producto, index) in productos"
-                                        v-show="producto.idCategoria.idCategoria==categoriaSelected &amp;&amp; buscarCategoria(index)"
-                                            v-on:click="productoSelected=index;"
-                                            v-bind:class="{ 'font-weight-bold' : productoSelected==index }">
-                                            <td class="text-center">{{producto.idProducto}}</td>
-                                            <th class="text-center">{{producto.nombreProducto}}</th>
-                                            <td class="text-center">${{producto.precio}}</td>
-                                            <td class="text-center"><button type="button" class="btn btn-primary"
-                                                    v-on:click="productoSelected=index; quitarAdetalle(productoSelected); buscarCantidad(index)">-</button>
-                                                <span>{{buscarCantidad(index)}}</span>
-                                                <button type="submit" class="btn btn-primary"
-                                                    v-on:click="productoSelected=index; agregarAdetalle(productoSelected); buscarCantidad(index);">+</button>
-                                            </td>
-                                            <td class="text-center">{{producto.esPreparado ? 'Sí':'No'}}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                        <div class="container d-sm-flex justify-content-sm-center" id="close-Button">
-                        </div>
-                    </div>
-                    <div class="modal-footer"><button class="btn btn-info" type="button" data-toggle="modal"
-                            data-target="#modalResumen" data-dismiss="modal">Siguiente</button></div>
-                </div>
-            </div>
-        </div>
-        <!---------------------------------------- Fin del Modal Agregar productos ---------------------------------------------------------->
-
-        <!----------------------------------------------------------- Modal Resumen Agregar Productos ---------------------------------------------------------->
-        <div class="modal fade modal-dialog-centered modal-dialog-scrollable show" role="dialog" tabindex="-1"
-            id="modalResumen">
-            <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document">
-                <div class="modal-content">
-                    <div class="modal-header d-flex align-items-center">
-                        <h4 class="modal-title">Resumen de Productos</h4><button type="button" class="close"
-                            data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="table-responsive d-flex">
-                            <table class="table tbl tr td" id="table">
-                                <thead>
-                                    <tr>
-                                        <th class="text-center">PRODUCTO</th>
-                                        <th class="text-center">PRECIO UNITARIO</th>
-                                        <th class="text-center">CANTIDAD</th>
-                                        <th class="text-center">TOTAL</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="dno2 in detallesDeNuevaOrden">
-                                        <td class="text-center">{{nombreProducto(dno2.idProducto)}}</td>
-                                        <td class="text-center">{{dno2.cantidad}}</td>
-                                        <td class="text-center">${{dno2.precioUnitario}}</td>
-                                        <td class="text-center">${{(dno2.precioUnitario*dno2.cantidad).toFixed(2)}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal-footer"><button class="btn btn-info" type="button" data-toggle="modal"
-                            data-target="#agregarProductosModal" data-dismiss="modal">Atras</button><button
-                            class="btn btn-primary" type="button" data-dismiss="modal"
-                            @click="agregarAOrdenDB();">Agregar</button></div>
-                </div>
-            </div>
-        </div>
-        <!----------------------------------------------------------- Fin del  Modal Resumen ---------------------------------------------------------->
         <footer id="footer" class="text-center footerTPI mt-4" style="position: fixed;padding: 0;">
             <div class="copyright py-4 text-center text-white" style="padding: 0.6rem!important;">
                 <div class="container"><small>TPI135</small></div>
@@ -610,8 +495,8 @@
         </div>
         <!------------------------------------------------ Fin del Modal cobrar orden ------------------------------------------>
 
-        <!------------------------------------------------ Modal Eliminar orden ------------------------------------------>
-        <div class="modal fade" role="dialog" tabindex="-1" id="modalEliminarOrden">
+        <!------------------------------------------------ Modal cerrar orden ------------------------------------------>
+        <div class="modal fade" role="dialog" tabindex="-1" id="modalCerrarOrden">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header d-flex align-items-center">
