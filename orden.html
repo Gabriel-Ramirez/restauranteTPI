@@ -74,18 +74,20 @@
                 <div class="primDiv btnNewOrder" style="text-align: end;"><button
                         class="btn btn-primary border rounded shadow-sm" id="btnAgregarOrder" type="button"
                         data-toggle="modal" data-target="#modalNuevaOrden" @click="iniciarNuevaOrden();">Nueva
-                        orden</button><button class="btn btn-info border rounded shadow-sm" id="btnNewOrder"
+                        orden</button>
+                    <!-- <button class="btn btn-info border rounded shadow-sm" id="btnNewOrder"
                         type="button" data-toggle="modal" data-target="#agregarProductosModal"
                         style="color: rgb(255,255,255);"
                         v-show="ordenSelected.estado!='C' &amp;&amp; ordenSelected.estado!=null"
-                        v-on:click="btnAgregarProductos();">Agregar productos</button>
+                        v-on:click="btnAgregarProductos();">Agregar productos</button> -->
                     <button class="btn btn-warning border rounded shadow-sm" id="btnNewOrder" type="button"
                         data-toggle="modal" data-target="#modalCobrar" style="color: rgb(255,255,255);"
                         v-if="ordenSelected.estado!='C' &amp;&amp; ordenSelected.estado!=null">Cobrar</button>
                     <button
                         class="btn btn-danger border rounded shadow-sm" id="btnEliminarOrden" type="button"
                         data-toggle="modal" data-target="#modalEliminarOrden"
-                        v-if="ordenSelected.estado!='C' &amp;&amp; ordenSelected.estado!=null" @click="ordenSelected.observacion =' '">Cerrar Orden</button></div>
+                        v-if="ordenSelected.estado!='C' &amp;&amp; ordenSelected.estado!=null" @click="ordenSelected.observacion =' '">Cerrar Orden</button>
+                    </div>
                 <div style="width: 100%;"><small class="form-text text-muted"
                         style="font-size: 20px;"><br>{{ordenesEstado ? 'Mostrando todas las ordenes':'Mostrando ordenes sólo activas'}}<br></small>
                     <div id="checkbox" class="slideThree" style="display: inline-table;"><input v-model="ordenesEstado"
@@ -139,6 +141,7 @@
                                 <th scope="col" class=" d-none d-sm-table-cell text-center">
                                     <label class="form-check-label" for="cbxEstado">ESTADO</label>
                                 </th>
+                                <th scope="col" class="text-center text-center"> ACCIONES </th>
                                 <th scope="col" class="d-none d-md-table-cell text-center text-center"> OBSERVACIONES </th>
 
                             </tr>
@@ -160,6 +163,16 @@
                                 <td class="text-center">${{orden.total}}</td>
                                 <td class="d-none d-sm-table-cell text-center" style="cursor: pointer;
                                 user-select: none;">{{orden.estado}}</td>
+                                <td class="text-center" style="cursor: pointer;
+                                                                user-select: none;">                    
+                                <button class="btn btn-warning btn btn-sm border rounded shadow-sm" :class="{'disabled' : orden.estado=='c' ||  orden.estado=='C'}" type="button"
+                        data-toggle="modal" data-target="#modalCobrar" style="color: rgb(255,255,255);"
+                        >Cobrar</button>
+                    <button
+                        class="btn btn-danger btn btn-sm border rounded shadow-sm" :class="{'disabled' : orden.estado=='c' ||  orden.estado=='C'}" type="button"
+                        data-toggle="modal" data-target="#modalEliminarOrden"
+                        @click="orden.observacion =' '">Cerrar</button>
+                    </td>
                                 <td class="d-none d-md-table-cell text-center" style="cursor: pointer;
                                 user-select: none;">{{orden.observacion}}</td>
                             </tr>
@@ -189,7 +202,7 @@
                                     <div class="input-group-prepend"><span class="d-sm-flex input-group-text"><i
                                                 class="fa fa-search" style="font-size: 24px;"></i></span></div><input
                                         class="form-control form-control-lg d-sm-flex justify-content-sm-start"
-                                        v-model="textoBusquedaCategoria" type="text" id="txtBuscar" placeholder="Buscar"
+                                        v-model="textoBusquedaCategoria" type="text" placeholder="Buscar"
                                         style="height: auto;">
                                 </div>
                             </div>
@@ -342,7 +355,7 @@
                                         <div class="input-group-prepend"><span class="d-sm-flex input-group-text"><i
                                                     class="fa fa-search" style="font-size: 24px;"></i></span></div>
                                         <input class="form-control form-control-lg d-sm-flex justify-content-sm-start"
-                                            v-model="textoBusquedaCategoria" type="text" id="txtBuscar"
+                                            v-model="textoBusquedaCategoria" type="text" 
                                             placeholder="Buscar" style="height: auto;">
                                     </div>
                                 </div>
@@ -529,9 +542,9 @@
                                 </tbody>
                             </table>
                             <div class="row justify-content-lg-end my-4 ml-2 mr-3">
-                                <label for="total">Total:</label>
+                                <label for="total2">Total:</label>
                                 <input class="ml-1 justify-content-center" type="text" v-model="precioTotal" disabled
-                                    id="total">
+                                    id="total2">
                             </div>
                         </div>
                     </div>
@@ -565,7 +578,7 @@
                                     </tr>
                                     <tr>
                                         <td class="d-flex justify-content-end" style="font-weight: bold;">FECHA:</td>
-                                        <td>{{frontEndDateFormat(this.ordenSelected.fecha)}}</td>
+                                        <td>{{this.ordenSelected.fecha}}</td>
                                     </tr>
                                     <tr>
                                         <td class="d-flex justify-content-end" style="font-weight: bold;">MESERO:</td>
@@ -613,7 +626,7 @@
                     <div class="modal-body">
                         <p>¿Cerrar orden: #{{ordenSelected.idOrden}} ?</p>
                         <label>Motivo:</label>
-                        <textarea class="form-control" aria-label="With textarea">{{ordenSelected.observacion}}</textarea>
+                        <textarea class="form-control" aria-label="With textarea" v-model="ordenSelected.observacion"></textarea>
                     </div>
                     <div class="modal-footer"><button class="btn btn-light" type="button"
                             data-dismiss="modal">Cerrar</button><button class="btn btn-danger" type="button"

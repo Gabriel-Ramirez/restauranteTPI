@@ -376,7 +376,7 @@ const vordenes = new Vue({
         },
 
         cargarDatos: function() {
-            console.log(this.token);
+            // console.log(this.token);
             axios.get(baseUri+'/orden', {headers})
                 .then(function(res) {
                     vordenes.ordenes = res.data;
