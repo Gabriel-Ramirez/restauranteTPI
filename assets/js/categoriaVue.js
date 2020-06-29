@@ -1,6 +1,7 @@
 const vueApp = new Vue({
     el: '#app',
     data: {
+        adminJWTVerifi:false,
         alerta: {
             titulo: "Error",
             mensaje: "Texto"
@@ -21,6 +22,7 @@ const vueApp = new Vue({
     },
 
     mounted: function () {
+        this.adminJWTVerifi=tokenJWT(localStorage.getItem("token")).categoria === "Administrador";
         this.cargarDatos();
     },
 

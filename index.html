@@ -51,7 +51,8 @@
               data-toggle="dropdown" aria-expanded="false" href="#">administración</a>
             <div class="dropdown-menu" role="menu"><a class="dropdown-item" role="presentation"
                 href="categoria.html">categoria</a><a class="dropdown-item" role="presentation"
-                href="productos.html">producto</a></div>
+                href="productos.html">producto</a><a id="usuariosTab" class="dropdown-item" role="presentation"
+                href="usuarios.html" style="display: none;">Usuarios</a></div>
           </li>
           <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
               class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" onClick="cerrarSesion();">Cerrar
@@ -60,9 +61,10 @@
       </div>
     </div>
   </nav>
-
-
-
+  <script>
+    let adminJWTVerifi = JSON.parse(atob(localStorage.getItem("token").split('.')[1]));
+    adminJWTVerifi.categoria === "Administrador" ? document.getElementById("usuariosTab").removeAttribute("style") : console.log("no admin")
+  </script>
   <!-- Este es el carousel y descripción del sistema  -->
   <section class="intro">
     <div class="left">

@@ -1,6 +1,7 @@
 const vordenes = new Vue({
     el: '#ordenes',
     data: {
+        adminJWTVerifi: false,
         ordenes: [],
         categorias: [],
         productos: [],
@@ -67,6 +68,7 @@ const vordenes = new Vue({
     },
 
     mounted: function () {
+        this.adminJWTVerifi=tokenJWT(localStorage.getItem("token")).categoria === "Administrador";
         this.token = localStorage.getItem('token')
         this.cargarDatos();
     },

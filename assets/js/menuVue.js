@@ -1,6 +1,7 @@
 var vueProduct = new Vue({
     el: "#menu",
     data: {
+        adminJWTVerifi:false,
         seleccionado: {
             color: 'white',
             fontSize: '13px'
@@ -167,6 +168,7 @@ var vueProduct = new Vue({
     },
 
     mounted: function() {
+        this.adminJWTVerifi=tokenJWT(localStorage.getItem("token")).categoria === "Administrador";
         this.token = localStorage.getItem('token');
         
         this.cargarDatos();
