@@ -1,0 +1,366 @@
+{
+  "id": "0af62dd8-8f15-4334-813e-3e89cea32922",
+  "version": "2.0",
+  "name": "RestauranteTest",
+  "url": "https://gabriel-ramirez.github.io/restauranteTPI/orden.html",
+  "tests": [{
+    "id": "964cde1e-63ac-4741-85fb-13c2c29ac9a8",
+    "name": "Untitled",
+    "commands": []
+  }, {
+    "id": "34fa80d1-f653-47e5-981a-8223e3d68436",
+    "name": "nuevaOrden",
+    "commands": [{
+      "id": "7dc8816e-2389-4ac6-9114-285f76d623c4",
+      "comment": "",
+      "command": "open",
+      "target": "https://gabriel-ramirez.github.io/restauranteTPI/orden.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "44b7e62a-84f6-4c76-b554-72426d5dca2a",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1366x703",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e255e2ac-c8d8-48c5-bbd3-3b0d08712171",
+      "comment": "",
+      "command": "click",
+      "target": "id=btnAgregarOrder",
+      "targets": [
+        ["id=btnAgregarOrder", "id"],
+        ["css=#btnAgregarOrder", "css:finder"],
+        ["xpath=//button[@id='btnAgregarOrder']", "xpath:attributes"],
+        ["xpath=//div[@id='ordenes']/div/form/div/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[2]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3b4f4292-5d21-47a8-b6b6-2ab3d802e4f5",
+      "comment": "",
+      "command": "click",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.form-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//div[@id='scroll1']/form/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "386fc95a-b6c3-49af-9443-c62e775f7780",
+      "comment": "",
+      "command": "type",
+      "target": "name=email",
+      "targets": [
+        ["name=email", "name"],
+        ["css=.form-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=//input[@name='email']", "xpath:attributes"],
+        ["xpath=//div[@id='scroll1']/form/div/input", "xpath:idRelative"],
+        ["xpath=//form/div/input", "xpath:position"]
+      ],
+      "value": " 4"
+    }, {
+      "id": "77690f14-d4e7-4491-bd51-40d9a62f9e27",
+      "comment": "",
+      "command": "click",
+      "target": "name=cliente",
+      "targets": [
+        ["name=cliente", "name"],
+        ["css=.form-group:nth-child(3) > .form-control", "css:finder"],
+        ["xpath=//input[@name='cliente']", "xpath:attributes"],
+        ["xpath=//div[@id='scroll1']/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "68aa51ea-c27e-449a-b260-4b95ea0fb47d",
+      "comment": "",
+      "command": "type",
+      "target": "name=cliente",
+      "targets": [
+        ["name=cliente", "name"],
+        ["css=.form-group:nth-child(3) > .form-control", "css:finder"],
+        ["xpath=//input[@name='cliente']", "xpath:attributes"],
+        ["xpath=//div[@id='scroll1']/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Andres "
+    }, {
+      "id": "ed189970-77ad-4952-bdd0-433d5a05be2d",
+      "comment": "",
+      "command": "click",
+      "target": "css=#scroll2 > #table .font-weight-bold .btn:nth-child(3)",
+      "targets": [
+        ["css=#scroll2 > #table .font-weight-bold .btn:nth-child(3)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[45]", "xpath:attributes"],
+        ["xpath=(//div[@id='table']/table/tbody/tr/td[3]/button[2])[45]", "xpath:idRelative"],
+        ["xpath=//div[2]/div[3]/table/tbody/tr/td[3]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "705ba3e6-f497-4603-86e0-27756392f61a",
+      "comment": "",
+      "command": "click",
+      "target": "css=#scroll2 > #table tr:nth-child(2) .btn:nth-child(3)",
+      "targets": [
+        ["css=#scroll2 > #table tr:nth-child(2) .btn:nth-child(3)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[46]", "xpath:attributes"],
+        ["xpath=(//div[@id='table']/table/tbody/tr[2]/td[3]/button[2])[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div[3]/table/tbody/tr[2]/td[3]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f01413af-4ca1-41bf-8eee-7a4960c7d5a5",
+      "comment": "",
+      "command": "click",
+      "target": "css=#scroll2 > #table .font-weight-bold .btn:nth-child(3)",
+      "targets": [
+        ["css=#scroll2 > #table .font-weight-bold .btn:nth-child(3)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[46]", "xpath:attributes"],
+        ["xpath=(//div[@id='table']/table/tbody/tr[2]/td[3]/button[2])[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div[3]/table/tbody/tr[2]/td[3]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "60ad1a71-cc53-41fa-b5ae-8bc967d70063",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Platos",
+      "targets": [
+        ["linkText=Platos", "linkText"],
+        ["css=#scroll2 .nav-item:nth-child(2) > .nav-link", "css:finder"],
+        ["xpath=(//a[contains(text(),'Platos')])[2]", "xpath:link"],
+        ["xpath=//div[@id='scroll2']/div[2]/div/ul/li[2]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[19]", "xpath:href"],
+        ["xpath=//div[2]/div[2]/div/ul/li[2]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c07b1d87-c593-4941-b613-99edf3a0c298",
+      "comment": "",
+      "command": "click",
+      "target": "css=#scroll2 > #table tr:nth-child(5) .btn:nth-child(3)",
+      "targets": [
+        ["css=#scroll2 > #table tr:nth-child(5) .btn:nth-child(3)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[49]", "xpath:attributes"],
+        ["xpath=(//div[@id='table']/table/tbody/tr[5]/td[3]/button[2])[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div[3]/table/tbody/tr[5]/td[3]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fee410f3-472e-4869-9cea-46324582776b",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=#scroll2 > #table tr:nth-child(5) .btn:nth-child(3)",
+      "targets": [
+        ["css=#scroll2 > #table tr:nth-child(5) .btn:nth-child(3)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[49]", "xpath:attributes"],
+        ["xpath=(//div[@id='table']/table/tbody/tr[5]/td[3]/button[2])[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div[3]/table/tbody/tr[5]/td[3]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a79d0b1e-a6a7-4464-9824-d789e8390f95",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=#scroll2 > #table .font-weight-bold .btn:nth-child(3)",
+      "targets": [
+        ["css=#scroll2 > #table .font-weight-bold .btn:nth-child(3)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[49]", "xpath:attributes"],
+        ["xpath=(//div[@id='table']/table/tbody/tr[5]/td[3]/button[2])[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div[3]/table/tbody/tr[5]/td[3]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "aee7ba16-7216-48eb-b8ee-fd2ff306d0a8",
+      "comment": "",
+      "command": "click",
+      "target": "css=#scroll2 > #table tr:nth-child(6) .btn:nth-child(3)",
+      "targets": [
+        ["css=#scroll2 > #table tr:nth-child(6) .btn:nth-child(3)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[50]", "xpath:attributes"],
+        ["xpath=(//div[@id='table']/table/tbody/tr[6]/td[3]/button[2])[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div[3]/table/tbody/tr[6]/td[3]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "afa47208-2dd1-49c8-af5e-59a16b121950",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Promocion",
+      "targets": [
+        ["linkText=Promocion", "linkText"],
+        ["css=#scroll2 .nav-item:nth-child(5) > .nav-link", "css:finder"],
+        ["xpath=(//a[contains(text(),'Promocion')])[2]", "xpath:link"],
+        ["xpath=//div[@id='scroll2']/div[2]/div/ul/li[5]/a", "xpath:idRelative"],
+        ["xpath=(//a[contains(@href, '#')])[22]", "xpath:href"],
+        ["xpath=//div[2]/div[2]/div/ul/li[5]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b44febe1-070d-4389-9d1e-e9ea86117e44",
+      "comment": "",
+      "command": "click",
+      "target": "css=#scroll2 > #table tr:nth-child(35) .btn:nth-child(3)",
+      "targets": [
+        ["css=#scroll2 > #table tr:nth-child(35) .btn:nth-child(3)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[79]", "xpath:attributes"],
+        ["xpath=(//div[@id='table']/table/tbody/tr[35]/td[3]/button[2])[2]", "xpath:idRelative"],
+        ["xpath=//div[2]/div[3]/table/tbody/tr[35]/td[3]/button[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "a3c54bd8-96e3-4b75-b467-554734f84e1e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.input-group:nth-child(5) > .form-control",
+      "targets": [
+        ["css=.input-group:nth-child(5) > .form-control", "css:finder"],
+        ["xpath=//div[@id='scroll2']/div[4]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1194c735-f02f-40b5-a3c3-b29318b4894b",
+      "comment": "",
+      "command": "type",
+      "target": "css=.input-group:nth-child(5) > .form-control",
+      "targets": [
+        ["css=.input-group:nth-child(5) > .form-control", "css:finder"],
+        ["xpath=//div[@id='scroll2']/div[4]/textarea", "xpath:idRelative"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": " los nachos sin jalapenios"
+    }, {
+      "id": "582ca171-7211-490b-a4c8-388ef548b18c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-success",
+      "targets": [
+        ["css=.btn-success", "css:finder"],
+        ["xpath=(//button[@type='button'])[99]", "xpath:attributes"],
+        ["xpath=//div[@id='scroll3']/div[2]/button", "xpath:idRelative"],
+        ["xpath=//div[3]/div[2]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Crear Orden')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "32786708-7720-4966-a8f3-f3d63fe061b7",
+      "comment": "",
+      "command": "click",
+      "target": "id=alertaCambio",
+      "targets": [
+        ["id=alertaCambio", "id"],
+        ["css=#alertaCambio", "css:finder"],
+        ["xpath=//div[@id='alertaCambio']", "xpath:attributes"],
+        ["xpath=//div[@id='ordenes']/div/form/div[2]", "xpath:idRelative"],
+        ["xpath=//form/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "789c82f1-2bf0-4755-adfa-6c03f59c21d8",
+    "name": "CobrarOrden",
+    "commands": [{
+      "id": "8c325db1-81ce-4e0b-a2ee-bb40d4cf04cf",
+      "comment": "",
+      "command": "open",
+      "target": "https://gabriel-ramirez.github.io/restauranteTPI/orden.html",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "928a01fd-935b-4fa3-9c48-41a5112cab9b",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1366x703",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "24843a9b-7253-4d46-8d0f-09f05adc48b8",
+      "comment": "",
+      "command": "click",
+      "target": "css=#table > tbody > tr:nth-child(19) > .text-center:nth-child(4)",
+      "targets": [
+        ["css=#table > tbody > tr:nth-child(19) > .text-center:nth-child(4)", "css:finder"],
+        ["xpath=//table[@id='table']/tbody/tr[19]/td[4]", "xpath:idRelative"],
+        ["xpath=//tr[19]/td[4]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "63129505-5fca-4e63-8810-865be0c0de56",
+      "comment": "",
+      "command": "click",
+      "target": "xpath=(//button[@id='btnNewOrder'])[2]",
+      "targets": [
+        ["xpath=(//button[@id='btnNewOrder'])[2]", "xpath:attributes"],
+        ["xpath=//div[@id='ordenes']/div/form/div/div[2]/button[3]", "xpath:idRelative"],
+        ["xpath=//button[3]", "xpath:position"],
+        ["xpath=//button[contains(.,'Cobrar')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "94a266d2-b5ee-4a3e-8655-6dd6896cf9ae",
+      "comment": "",
+      "command": "click",
+      "target": "css=.input-group:nth-child(2) > .form-control",
+      "targets": [
+        ["css=.input-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=(//input[@type='text'])[12]", "xpath:attributes"],
+        ["xpath=//div[@id='modalCobrar']/div/div/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "adf34bf8-d129-487e-a378-58db5cef55e5",
+      "comment": "",
+      "command": "type",
+      "target": "css=.input-group:nth-child(2) > .form-control",
+      "targets": [
+        ["css=.input-group:nth-child(2) > .form-control", "css:finder"],
+        ["xpath=(//input[@type='text'])[12]", "xpath:attributes"],
+        ["xpath=//div[@id='modalCobrar']/div/div/div[2]/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "60"
+    }, {
+      "id": "0a53b130-fcd6-4b87-9225-01bd01c0be67",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-danger:nth-child(1)",
+      "targets": [
+        ["css=.btn-danger:nth-child(1)", "css:finder"],
+        ["xpath=(//button[@type='button'])[104]", "xpath:attributes"],
+        ["xpath=//div[@id='modalCobrar']/div/div/div[3]/button", "xpath:idRelative"],
+        ["xpath=//div[7]/div/div/div[3]/button", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "be5d5895-a2ec-46fb-9a34-4db9b12acac7",
+      "comment": "",
+      "command": "click",
+      "target": "id=alertaCambio",
+      "targets": [
+        ["id=alertaCambio", "id"],
+        ["css=#alertaCambio", "css:finder"],
+        ["xpath=//div[@id='alertaCambio']", "xpath:attributes"],
+        ["xpath=//div[@id='ordenes']/div/form/div[2]", "xpath:idRelative"],
+        ["xpath=//form/div[2]", "xpath:position"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "fab4b345-a222-475e-aad3-c7a073d0a7e9",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["964cde1e-63ac-4741-85fb-13c2c29ac9a8"]
+  }],
+  "urls": ["https://gabriel-ramirez.github.io/restauranteTPI/orden.html"],
+  "plugins": []
+}
