@@ -5,6 +5,18 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home - Brand</title>
+
+
+    <meta name="theme-color" content="#3A3A3A">
+    <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+
+
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
@@ -196,10 +208,7 @@
             <div class="modal-dialog modal-dialog-scrollable modal-xl" role="document" style="padding-top: 10%;">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h2>Nueva orden</h2><button type="button" class="close" data-dismiss="modal"
-                            aria-label="Close"><span aria-hidden="true">×</span></button>
-                    </div>
-                    <div class="modal-header text-break" id="asaber">
+                        <h2 class="h5">Nueva orden</h2>
                         <div id="spy" style="width:100%;">
                             <ul class="nav nav-pills nav-fill">
                                 <li class="nav-item"><a id="generales" class="nav-link active"
@@ -208,10 +217,18 @@
                                 <li class="nav-item"><a class="nav-link" href="#scroll3">Resumen</a></li>
                             </ul>
                         </div>
-                    </div>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                  
+                          <div class="modal-header text-break" id="asaber">
+
+                        </div>
+                        </div>
+
                     <div class="modal-body text-break" id="guasap" onscroll="onScrollEvent()">
-                        <div class="col-sm-16 scrollspy-example" data-spy="scroll" data-target="#spy"
-                            style="padding: 30px;margin: 0px;">
+                        <div class="col-sm scrollspy-example" data-spy="scroll" data-target="#spy"
+                            style="padding: 10px;margin: 0px;">
                             <!--------------- Informacion general ------------>
                             <div id="scroll1">
                                 <form>
@@ -523,6 +540,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.4/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
     <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script> -->
+    <script src="./script.js"></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
     <script src="urlBase.js"></script>

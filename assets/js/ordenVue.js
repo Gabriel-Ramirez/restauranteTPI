@@ -68,155 +68,20 @@ const vordenes = new Vue({
     },
 
     mounted: function () {
-        this.adminJWTVerifi=tokenJWT(localStorage.getItem("token")).categoria === "Administrador";
+        this.adminJWTVerifi = tokenJWT(localStorage.getItem("token")).categoria === "Administrador";
         this.token = localStorage.getItem('token')
         this.cargarDatos();
     },
     methods: {
 
-        orderBy: function (campo) {
-            console.log(campo);
-            if (this.orderByCampo == campo)
-                this.orderByAsc *= -1;
-            this.orderByCampo = campo;
-
-            if (campo === "numeroDeOrden") {
-                this.ordenes.sort(function (a, b) {
-                    // Se debe usar vueProduct.orderByAsc
-                    // porque this ya no hace referencia al objeto vue
-                    console.log("ordenar por numero de orden")
-                    return vordenes.orderByAsc *
-                        (a.idOrden - b.idOrden);
-                });
-            }
-            if (campo === "mesa") {
-                this.ordenes.sort(function (a, b) {
-                    return vordenes.orderByAsc *
-                        (a.mesa - b.mesa);
-                });
-            }
-            if (campo === "cliente") {
-                vordenes.orderByAsc === 1 ? vordenes.ordenes.sort((a, b) => (a.cliente > b.cliente) ? 1 : -1) : vordenes.ordenes.sort((a, b) => (a.cliente < b.cliente) ? 1 : -1);
-            }
-            if (campo === "mesero") {
-                vordenes.orderByAsc === 1 ? vordenes.ordenes.sort((a, b) => (a.idUsuario.nombre > b.idUsuario.nombre) ? 1 : -1) : vordenes.ordenes.sort((a, b) => (a.idUsuario.nombre < b.idUsuario.nombre) ? 1 : -1);
-            }
-            if (campo === "fecha") {
-                vordenes.orderByAsc === 1 ? vordenes.ordenes.sort((a, b) => (a.fecha > b.fecha) ? 1 : -1) : vordenes.ordenes.sort((a, b) => (a.fecha < b.fecha) ? 1 : -1);
-            }
-
-            if (campo == "total") {
-                this.ordenes.sort(function (a, b) {
-                    // Se debe usar vueProduct.orderByAsc
-                    // porque this ya no hace referencia al objeto vue
-                    return vordenes.orderByAsc * (a.total - b.total);
-                });
-
-            }
-        },
-        quitarAdetalle(productoSelected) {
-            var cantidad = 0;
-            this.nuevoDetalleOrden.idOrden = this.ordenSelected.idOrden;
-            this.nuevoDetalleOrden.idProducto = this.productos[this.productoSelected].idProducto;
-            this.nuevoDetalleOrden.precioUnitario = this.productos[this.productoSelected].precio;
-            this.nuevoDetalleOrden.cantidad = cantidad;
-
-            if (this.detallesDeNuevaOrden.length != 0) {
-                for (var index = 0; index < this.detallesDeNuevaOrden.length; index++) {
-                    const element = this.detallesDeNuevaOrden[index];
-                    if (element.idProducto === this.nuevoDetalleOrden.idProducto && element.idOrden === this.nuevoDetalleOrden.idOrden) {
-                        cantidad = element.cantidad;
-                        if (cantidad > 0) {
-                            cantidad = cantidad - 1;
-                            vordenes.detallesDeNuevaOrden[index].cantidad = cantidad;
-                        }
-                        if (cantidad === 0) {
-                            this.detallesDeNuevaOrden.splice(index, 1);
-                        }
-                    }
-                }
-            }
-
-
-            this.nuevoDetalleOrden = {
-                    "cantidad": 0,
-                    "idOrden": 0,
-                    "idProducto": 0,
-                    "precioUnitario": 0
-                },
-                this.obtenerElTotalNuevaOrden();
-            console.log(this.detallesDeNuevaOrden);
-        },
-        actualizarTotalOrden() {
-            var totalAnterior = this.ordenSelected.total;
-            this.ordenSelected.total = (this.precioTotal + totalAnterior).toFixed(2);
-            console.log(this.ordenSelected.total);
-            axios.put(baseUri + '/orden', {
-                    headers
-                }, this.ordenSelected)
-                .then(function (response) {
-                    console.log("Se actualizo el total");
-                    vordenes.cargarDatos();
-                })
-                .catch(function (error) {
-                    console.log("No se actualizo el total");
-                    console.log(error)
-                })
-
-        },
-        agregarAOrdenDB() {
-            console.log("agregar a orden DB...");
-            debugger;
-            for (let index = 0; index < this.detalleOrdenes.length; index++) {
-                const yaEnorden = this.detalleOrdenes[index];
-                for (let i = 0; i < this.detallesDeNuevaOrden.length; i++) {
-                    const porAgregar = this.detallesDeNuevaOrden[i];
-                    if (yaEnorden.idOrden === porAgregar.idOrden && yaEnorden.idProducto === porAgregar.idProducto) {
-                        var NuevaCantidad = yaEnorden.cantidad + porAgregar.cantidad;
-                        porAgregar.cantidad = NuevaCantidad;
-                        console.log("ya hay un producto igual en la orden")
-                        axios.put(baseUri + '/orden', {
-                                headers
-                            }, porAgregar)
-                            .then(function (response) {
-                                vordenes.cargarDatos();
-                                vordenes.actualizarTotalOrden();
-                                console.log("se agrego con exito")
-                                vordenes.mostrarAlertaCambio('Exito', 'Se agrego a la orden correctamente');
-                            })
-                            .catch(function (error) {
-                                console.log(error);
-                                vordenes.mostrarAlertaCambio('Error', error);
-                            });
-                    } else {
-                        if (yaEnorden.idOrden === porAgregar.idOrden) {
-                            console.log("no hay productos iguales en la orden")
-                            axios.post(baseUri + '/orden', {
-                                    headers
-                                }, porAgregar)
-                                .then(function (response) {
-                                    vordenes.cargarDatos();
-                                    vordenes.actualizarTotalOrden();
-                                    console.log("se agrego con exito")
-                                    vordenes.mostrarAlertaCambio('Exito', 'Se agrego a la orden correctamente');
-                                }).catch(function (error) {
-                                    vordenes.cargarDatos();
-                                });
-                        }
-                    }
-
-                }
-
-            }
-
-        },
+        // Sirve para agregar productos contenidosen el menu 
         btnAgregarProductos() {
             this.nuevoDetalleOrden = {
-                    "cantidad": 0,
-                    "idOrden": 0,
-                    "idProducto": 0,
-                    "precioUnitario": 0
-                },
+                "cantidad": 0,
+                "idOrden": 0,
+                "idProducto": 0,
+                "precioUnitario": 0
+            },
                 this.detallesDeNuevaOrden = [],
                 this.productoSelected = "";
             this.categoriaSelected = 1,
@@ -224,13 +89,14 @@ const vordenes = new Vue({
 
         },
 
+        // limpia el los atributos para la creacion de una nueva orden 
         iniciarNuevaOrden() {
             this.nuevoDetalleOrden = {
-                    "cantidad": 0,
-                    "idOrden": 0,
-                    "idProducto": 0,
-                    "precioUnitario": 0
-                },
+                "cantidad": 0,
+                "idOrden": 0,
+                "idProducto": 0,
+                "precioUnitario": 0
+            },
                 this.nuevaOrden = {
                     "cliente": " ",
                     "estado": "A",
@@ -266,6 +132,7 @@ const vordenes = new Vue({
             this.mostrarCobrar();
         },
 
+        // Agregar una nueva orden a la base de datos 
         nuevaOrdenDB() {
 
             this.nuevaOrden.idUsuario = parseInt(localStorage.getItem('idUsuario'));
@@ -277,8 +144,8 @@ const vordenes = new Vue({
             console.log('..' + this.headers.JWT);
             console.log(this.nuevaOrden)
             axios.post(baseUri + '/orden', this.nuevaOrden, {
-                    headers: this.headers
-                })
+                headers: this.headers
+            })
                 .then(function (response) {
                     console.log(response.data)
                     vordenes.ordenSelected = response.data;
@@ -289,8 +156,8 @@ const vordenes = new Vue({
                     console.log(vordenes.detallesDeNuevaOrden)
                     for (var iterator of vordenes.detallesDeNuevaOrden) {
                         axios.post(baseUri + '/detalleorden', iterator, {
-                                headers
-                            }, )
+                            headers
+                        })
                             .then(function (res) {
                                 vordenes.iniciarNuevaOrden();
                                 console.log('recargando los datos')
@@ -357,7 +224,6 @@ const vordenes = new Vue({
                 return true;
             var ord = this.ordenes[x].idOrden + this.ordenes[x].mesero + this.ordenes[x].mesa + this.ordenes[x].cliente + this.frontEndDateFormat(this.ordenes[x].fecha);
             ord = ord.toUpperCase();
-            console.log(ord);
 
             if (ord.indexOf(this.textoBusqueda.toUpperCase()) >= 0)
                 return true;
@@ -393,8 +259,8 @@ const vordenes = new Vue({
         cargarDatos: function () {
             // console.log(this.token);
             axios.get(baseUri + '/orden', {
-                    headers
-                })
+                headers
+            })
                 .then(function (res) {
                     vordenes.ordenes = res.data;
                 })
@@ -405,12 +271,12 @@ const vordenes = new Vue({
 
             //PRODUCTOS
             axios.get(baseUri + '/producto', {
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8',
-                        'jwt': this.token,
-                        "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
-                    }
-                })
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'jwt': this.token,
+                    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
+                }
+            })
                 .then(function (res) {
                     vordenes.productos = res.data;
                 })
@@ -421,12 +287,12 @@ const vordenes = new Vue({
 
             //Cargar Categorias
             axios.get(baseUri + '/categoria', {
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8',
-                        'jwt': this.token,
-                        "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
-                    }
-                })
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'jwt': this.token,
+                    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
+                }
+            })
                 .then(function (res) {
                     vordenes.categorias = res.data;
                 })
@@ -437,12 +303,12 @@ const vordenes = new Vue({
 
             //Cargar detalle de orden
             axios.get(baseUri + '/detalleorden', {
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8',
-                        'jwt': this.token,
-                        "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
-                    }
-                })
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'jwt': this.token,
+                    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
+                }
+            })
                 .then(function (res) {
                     vordenes.detalleOrdenes = res.data;
                 })
@@ -452,12 +318,12 @@ const vordenes = new Vue({
 
             //Detalle Orden
             axios.get(baseUri + '/detalleorden', {
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8',
-                        'jwt': this.token,
-                        "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
-                    }
-                })
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'jwt': this.token,
+                    "Access-Control-Allow-Headers": "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, jwt, mensaje"
+                }
+            })
                 .then(function (res) {
                     vordenes.detalleOrden = res.data;
                 })
@@ -478,8 +344,8 @@ const vordenes = new Vue({
             this.ordenSelected.estado = 'c';
             this.ordenSelected.idUsuario = this.ordenSelected.idUsuario.idUsuario;
             axios.put(baseUri + '/orden', this.ordenSelected, {
-                    headers
-                })
+                headers
+            })
                 .then(function (response) {
                     vordenes.mostrarAlertaCambio('Exito', 'La orden fue cerrada');
                 })
@@ -546,8 +412,8 @@ const vordenes = new Vue({
                     }
                     console.log(cobrar)
                     axios.put(baseUri + '/orden', cobrar, {
-                            headers: this.headers
-                        })
+                        headers: this.headers
+                    })
                         .then(response => {
                             console.log(response);
                             vordenes.mostrarAlertaCambio("Exito: ", "Cambio:$" + (this.cambio).toFixed(2) + "   Total:$" + this.ordenSelected.total + "   Efectivo:$" + this.efectivo);

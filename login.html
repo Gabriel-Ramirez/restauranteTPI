@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Bienvenido</title>
+
+    <meta name="theme-color" content="#3A3A3A">
+    <meta name="MobileOptimized" content="width">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="apple-touch-icon" href="/favicon.png">
+    <link rel="manifest" href="./manifest.json">
+    <link rel="shortcut icon" href="./favicon.png" type="image/x-icon">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600" rel="stylesheet" type="text/css" />
     <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
@@ -20,74 +30,6 @@
           >
         </li>
       </ul>
-
-      <!-- <div class="tab-content"> -->
-        <!-- <div id="signup">
-          <h1>¡Felicidades eres parte de restaurante!</h1>
-
-          <form>
-            <div class="top-row">
-              <div class="field-wrap">
-                <label> Nombre<span class="req">*</span> </label>
-                <input
-                  type="text"
-                  v-model="nuevoUsuario.nombre"
-                  required
-                  autocomplete="off"
-                />
-              </div>
-
-              <div class="field-wrap">
-                <label> Apellido<span class="req">*</span> </label>
-                <input
-                  type="text"
-                  required
-                  autocomplete="off"
-                  v-model="nuevoUsuario.apellido"
-                />
-              </div>
-            </div>
-
-            <div class="field-wrap">
-              <label> Correo<span class="req">*</span> </label>
-              <input
-                id="correo"
-                type="email"
-                required
-                autocomplete="off"
-                v-model="nuevoUsuario.email"
-              />
-            </div>
-
-            <div class="field-wrap">
-              <label> Nombre de Usuario<span class="req">*</span> </label>
-              <input
-                type="text"
-                required
-                v-model="nuevoUsuario.usuario"
-                autocomplete="off"
-              />
-            </div>
-
-            <div class="field-wrap">
-              <label> Contraseña<span class="req">*</span> </label>
-              <input
-                type="password"
-                v-model="nuevoUsuario.contrasenia"
-                required
-                autocomplete="off"
-              />
-            </div>
-
-           <a @click="agregarUsuario"><input
-            type="button"
-              class="button button-block"
-              value="Registrar"
-            >
-              
-        </input></a>
-                </form>
-    </div> -->
 
     <div id="login">
         <h1>¡Bienvenido de regreso!</h1>
@@ -148,6 +90,8 @@
         <div class="loader-section section-left"></div>
         <div class="loader-section section-right"></div>
     </div>
+
+    <script src="./script.js"></script>
 
     <!-- loading codepen -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>

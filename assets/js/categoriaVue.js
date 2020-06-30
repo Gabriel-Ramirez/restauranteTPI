@@ -1,7 +1,7 @@
 const vueApp = new Vue({
     el: '#app',
     data: {
-        adminJWTVerifi:false,
+        adminJWTVerifi: false,
         alerta: {
             titulo: "Error",
             mensaje: "Texto"
@@ -22,19 +22,20 @@ const vueApp = new Vue({
     },
 
     mounted: function () {
-        this.adminJWTVerifi=tokenJWT(localStorage.getItem("token")).categoria === "Administrador";
+        this.adminJWTVerifi = tokenJWT(localStorage.getItem("token")).categoria === "Administrador";
         this.cargarDatos();
     },
 
     methods: {
+        // Agrega una nueva categoria a la base de datos 
         agregarCategoria() {
-            console.log("..........."+headers.JWT);
-            axios.post(baseUri + '/categoria', this.nuevaCategoria,{
+            console.log("..........." + headers.JWT);
+            axios.post(baseUri + '/categoria', this.nuevaCategoria, {
                 headers
             })
-        
+
                 .then(function (response) {
-                   
+
                     vueApp.cargarDatos();
                     vueApp.nuevaCategoria = {
                         "idCategoria": 0,
@@ -44,25 +45,26 @@ const vueApp = new Vue({
                 })
                 .catch(function (error) {
                     console.log(error);
-                    
+
                     vueApp.mostrarAlerta('Error', error);
-                    
+
                 });
         },
 
+        // muestra la categoria en la consola "usar solo con objetivos de desarrollo "
         mostrarCategoria() {
             console.log(this.categorias[this.categoriaSeleccionada]);
         },
 
-
+        // Sirve para editar la categoria 
         editarCategoria() {
-           axios.put(baseUri + '/categoria', {
+            axios.put(baseUri + '/categoria', {
                 //Este es el body de la request que se envia
-                    idCategoria: this.categoriaSeleccionada.idCategoria,
-                    nombreCategoria: this.categoriaSeleccionada.nombreCategoria
-                }, {
-                    headers
-                })
+                idCategoria: this.categoriaSeleccionada.idCategoria,
+                nombreCategoria: this.categoriaSeleccionada.nombreCategoria
+            }, {
+                headers
+            })
                 .then(response => {
                     console.log("se edito con exito");
                     vueApp.mostrarAlerta("Exito", "Se edito con Exito")
@@ -75,10 +77,10 @@ const vueApp = new Vue({
 
         },
 
-
+        // elimina de la base de datos una categoria 
         eliminarCategoria: function () {
 
-            axios.delete(baseUri + '/categoria/' + this.categoriaSeleccionada.idCategoria,{
+            axios.delete(baseUri + '/categoria/' + this.categoriaSeleccionada.idCategoria, {
                 headers
             })
                 .then(function (res) {
@@ -95,13 +97,11 @@ const vueApp = new Vue({
                 });
         },
 
+
+        // retorna el nombre de la categoria seleccionada 
         nombreCategoria() {
             return this.categoriaSeleccionada.nombreCategoria
-            // this.catSelected = this.categorias.find(cat =>{
-            //   return cat.idCategoria === this.categoriaSeleccionada
 
-            // });
-            // console.log(this.catSelected.nombreCategoria);
         },
 
 
@@ -109,8 +109,8 @@ const vueApp = new Vue({
         cargarDatos: function () {
             //Carga categorias
             axios.get(baseUri + '/categoria', {
-                    headers
-                })
+                headers
+            })
                 .then(function (response) {
                     vueApp.categorias = response.data;
                     console.log("se cargaron los datos");
@@ -122,6 +122,8 @@ const vueApp = new Vue({
 
         },
 
+        // muestra la alerta que notifica si las operaciones se realizaron con exito o fallaron 
+        //titu recibe el titulo del mensaje y msg recibe el cuerpo del mensaje 
         mostrarAlerta: function (titu, msg) {
             this.alerta.titulo = titu;
             this.alerta.mensaje = msg;
@@ -138,6 +140,7 @@ const vueApp = new Vue({
 
     },
 
+    // los metodos que deben ser cargados al inicio 
     computed: {
         categoriaActiva() {
             this.categoriaEdit = this.categorias.find(it => {
